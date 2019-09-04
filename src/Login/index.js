@@ -12,7 +12,8 @@ class Login extends React.Component {
 	}
 
 	handleSubmit = (e) => {
-		e.preventDafault()
+		e.preventDefault()
+		this.props.toggleContainer()
 	}
 
 	handleChange = (e) => {
@@ -34,7 +35,7 @@ class Login extends React.Component {
 						<label> password </label>
 						<input type='password' value={this.state.password} name='password' onChange={this.handleChange}/>
 					</Form.Field>
-					<Button>submit</Button>
+					<Button>log in</Button>
 				</Form> 
 				<p>dont have an account? <a onClick={this.props.toggleLogin.bind(null)}>register</a> </p>
 			</div> 

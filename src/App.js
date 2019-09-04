@@ -1,10 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './Header'
-import Apod from './Apod'
-import Register from './Register'
-import Login from './Login'
-
+import LandingContainer from './LandingContainer'
 class App extends React.Component {
   constructor(){
     super()
@@ -13,7 +10,8 @@ class App extends React.Component {
       apodCaption:'',
       apodParagraph:'',
       date:'',
-      displayLogin: false 
+      displayLandingPage: true,
+      loggedUser: null
     }
   }
 
@@ -39,24 +37,24 @@ class App extends React.Component {
       }) 
   }
 
-  toggleLogin = () => {
+  toggleContainer = (user) => {
     this.setState({
-      displayLogin: !this.state.displayLogin
+      displayLandingPage: !this.state.displayLandingPage,
+      loggedUser: user
     })
-  }
 
+    // in here we can also set the state of logged in users 
+  }
 
   render(){
     const appStyle = {
         backgroundImage: `url(${this.state.apodImgUrl})`,
       }
-    // console.log(this.state,"<--------state in app");
+    console.log(this.state,"<--------state in app");
     return (
       <div style={ appStyle } className="App">
         <Header />
-        <Apod caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph}/>
-        {this.state.displayLogin? <Login toggleLogin={this.toggleLogin}/>: <Register toggleLogin={this.toggleLogin}/>}
-
+        {this.state.displayLandingPage? <LandingContainer toggleContainer={this.toggleContainer} caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph}/>: null}
       </div>
     ); 
   }

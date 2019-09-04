@@ -10,8 +10,25 @@ class Register extends React.Component {
 		}
 	}
 
-	handleSubmit = (e) => {
+	handleSubmit = async (e) => {
 		e.preventDefault()
+		const url = `http://localhost:9000/api/v1/user/register`
+		const registerResponse = await fetch(url,{
+			method: 'POST',
+			body: JSON.stringify(this.state),
+			credentials: 'include',
+			headers: {
+		          'Content-Type': 'application/json'
+		        }
+		})
+		if(registerResponse.status !== 200){
+	        	throw Error('register not working')
+	      	}
+	    const parsed = await registerResponse.json()
+	    console.log(parsed);
+
+		this.props.toggleContainer(parsed.data)
+
 	}
 
 	handleChange = (e) => {
@@ -34,7 +51,7 @@ class Register extends React.Component {
 						<label> password </label>
 						<input type='password' value={this.state.password} name='password' onChange={this.handleChange}/>
 					</Form.Field>
-					<Button>submit</Button>
+					<Button>register</Button>
 				</Form> 
 				<p>already have an account? <a onClick={this.props.toggleLogin.bind(null)}>Login</a> </p>
 			</div>
