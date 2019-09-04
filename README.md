@@ -1,68 +1,18 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## user story 
 
-## Available Scripts
+1. users can load up the home page and see a NASA picture of the day with descriptions. and a login/register window
+2. users need to register and login.
+3. when user register, they can 'adopt' a Kepler planet by entering a number and a letter, or by choosing from a provided list, browse planets?
+4. the planet will be living in the background of the app, users can add/edit their own descriptions to the existing minimal info(fetched from NASA planet api) about the planet.
+5. users need to occasionally go play with the planet to keep it alive (like tamagotchi, but the planet only gets sad if users don't interact with it.)
+6. users interact with the planet directly by hitting a button or by posting/saving posts on the app (detailed below).
 
-In the project directory, you can run:
+7. users can delete the planet, see more detailed info about the planet, post the planet status.
 
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+8. users can find a drop down menu with categories including most of the NASA open source api data like space weather, near earth objects, Mars projects.....
+9. users can choose the category and enter the info they want to see or just get some random data.
+10. the app will fetch the data from NASA api and translate it into a non-programmer readable paragraph/photo.
+11. users can save the data/info/paragraph that the get from the request(only they can see it).
+12. users can add comment to the info they got back(will not post to their home page if they dont want to).
+13. users can repost the data/info/paragraph to their home page.
+14. other users can comment, like, save the data/info/paragraph posted on users home page.

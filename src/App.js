@@ -1,26 +1,52 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './Header'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      apodImgUrl: '',
+      apodCaption:'',
+      apodParagraph:''
+    }
+  }
+
+  componentDidMount(){
+      this.getApodData()
+      console.log('this should only run once');
+  }
+
+  getApodData = async () => {
+      const response = await fetch('http://localhost:9000/api/v1/nasadata/apod', {
+          method: 'GET',
+          credentials: 'include',
+      })
+      const parsdResponse = await response.json()
+      const mydata = JSON.parse(parsdResponse.data.myData)
+      console.log(mydata,"<------landing page apod data");
+
+      this.setState({
+        apodImgUrl: parsdResponse.data.imgUrl,
+        apodCaption: mydata.imgCaption,
+        apodParagraph: mydata.explnation,
+      }) 
+  }
+
+  render(){
+    const appStyle = {
+        backgroundImage: `url(${this.state.apodImgUrl})`,
+        backgroundSize: 'cover'
+      }
+    console.log(this.state,"<--------state in app");
+    return (
+      <div style={ appStyle } className="App">
+        <Header />
+      </div>
+    ); 
+  }
 }
+
+
 
 export default App;
