@@ -2,6 +2,10 @@ import React from 'react';
 import './App.css';
 import Header from './Header'
 import LandingContainer from './LandingContainer'
+import SelectPlanetContainer from './SelectPlanetContainer'
+
+
+
 class App extends React.Component {
   constructor(){
     super()
@@ -11,7 +15,8 @@ class App extends React.Component {
       apodParagraph:'',
       date:'',
       displayLandingPage: true,
-      loggedUser: null
+      loggedUser: null,
+      selectPlanet: false
     }
   }
 
@@ -40,11 +45,13 @@ class App extends React.Component {
   toggleContainer = (user) => {
     this.setState({
       displayLandingPage: !this.state.displayLandingPage,
-      loggedUser: user
+      loggedUser: user,
+      selectPlanet: !this.state.selectPlanet
     })
-
-    // in here we can also set the state of logged in users 
   }
+
+
+
 
   render(){
     const appStyle = {
@@ -55,6 +62,7 @@ class App extends React.Component {
       <div style={ appStyle } className="App">
         <Header />
         {this.state.displayLandingPage? <LandingContainer toggleContainer={this.toggleContainer} caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph}/>: null}
+        {this.state.selectPlanet ? <SelectPlanetContainer loggedUser={this.state.loggedUser}/> : null}
       </div>
     ); 
   }

@@ -9,6 +9,10 @@
   color: white;
 }
 
+.PlanetContainer{
+  color: white;
+}
+
 .Apod, .RegisterLogin{
   vertical-align:middle;
   display: inline-block;
