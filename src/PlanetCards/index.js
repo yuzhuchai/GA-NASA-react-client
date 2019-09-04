@@ -5,7 +5,7 @@ function PlanetCards (props){
 	console.log(props,'<-----props in PlanetCard');
 	const planetCards = props.randomPlanet.map((planet, i) => {
 		return(
-			<Card key={i}>
+			<Card key={i} >
 				<Card.Content>
 					<Card.Header>{planet.name}</Card.Header>
 					<Card.Description>{planet.bio}</Card.Description>
@@ -17,12 +17,10 @@ function PlanetCards (props){
 		)
 	})
 	return (
-		<div>
-			<Button onClick={props.shuffle.bind(null)}>Shuffle</Button>
+		
 		    <Card.Group itemsPerRow={3}>
 		    	{planetCards}
 		    </Card.Group>
-	    </div>
 	)
 }
 

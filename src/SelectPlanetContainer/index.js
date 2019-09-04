@@ -1,5 +1,6 @@
 import React from 'react'
 import PlanetCards from '../PlanetCards'
+import SearchPlanet from '../SearchPlanet'
 import { Button } from 'semantic-ui-react'
 
 class SelectPlanetContainer extends React.Component {
@@ -46,9 +47,10 @@ class SelectPlanetContainer extends React.Component {
 		          'Content-Type': 'application/json'
 		        }			
 		})
-
 		const parsed = await createdPlanet.json()
 		console.log(parsed,'<00000000shou create the planet');
+		// need to set state or do something else. so when the button is hit, switch to a new page. 
+
 	}
 
 	render(){
@@ -56,7 +58,11 @@ class SelectPlanetContainer extends React.Component {
 		return(
 			<div className='PlanetContainer'>
 				<h4>Choose a planet to adopt!! you can pick from the following cards or select your own planet</h4>
-				<PlanetCards randomPlanet={this.state.randomPlanet} shuffle={this.getRandomPlanet} adoptPlanet={this.adoptPlanet}/>
+				<SearchPlanet adoptPlanet={this.adoptPlanet}/>
+				<div className='PlanetCard'>
+					<PlanetCards randomPlanet={this.state.randomPlanet} adoptPlanet={this.adoptPlanet}/>
+				</div>
+				<Button onClick={this.getRandomPlanet.bind(null)}>Shuffle</Button>
 			</div> 
 		)
 	}

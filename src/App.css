@@ -25,7 +25,24 @@
   padding: 20px;
 }
 
+.SearchPlanet{
+    background-color: rgba(100,100,100,0.8);
+    color: white;
+    width: 30vw;
+    margin: 40px;
+    padding: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
 
+.Card{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.PlanetCard{
+  margin: 40px;
+}
 
 @keyframes App-logo-spin {
   from {
