@@ -1,5 +1,6 @@
 import React from 'react'
-import { Grid, Card } from 'semantic-ui-react'
+import PlanetCards from '../PlanetCards'
+import { Button } from 'semantic-ui-react'
 
 class SelectPlanetContainer extends React.Component {
 	constructor(){
@@ -34,8 +35,8 @@ class SelectPlanetContainer extends React.Component {
 		return(
 			<div className='PlanetContainer'>
 				<h4>Choose a planet to adopt!! you can pick from the following cards or select your own planet</h4>
-
-
+				<Button onClick={this.getRandomPlanet.bind(null)}>Shuffle</Button>
+				<PlanetCards randomPlanet={this.state.randomPlanet}/>
 			</div> 
 		)
 	}
