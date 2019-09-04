@@ -1,27 +1,27 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Apod, .RegisterLogin{
+  vertical-align:middle;
+  display: inline-block;
+  height: 60vh;
+  width: 40vw;
+  margin: 20px;
+  margin-top: 100px;
+  background-color: rgba(100,100,100,0.8);
+  color: white;
+  padding: 20px;
 }
+
+
 
 @keyframes App-logo-spin {
   from {

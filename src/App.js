@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import Header from './Header'
+import Apod from './Apod'
+import Register from './Register'
+import Login from './Login'
 
 class App extends React.Component {
   constructor(){
@@ -8,7 +11,9 @@ class App extends React.Component {
     this.state = {
       apodImgUrl: '',
       apodCaption:'',
-      apodParagraph:''
+      apodParagraph:'',
+      date:'',
+      displayLogin: false 
     }
   }
 
@@ -24,24 +29,34 @@ class App extends React.Component {
       })
       const parsdResponse = await response.json()
       const mydata = JSON.parse(parsdResponse.data.myData)
-      console.log(mydata,"<------landing page apod data");
+      console.log(parsdResponse,"<------landing page apod data");
 
       this.setState({
         apodImgUrl: parsdResponse.data.imgUrl,
         apodCaption: mydata.imgCaption,
         apodParagraph: mydata.explnation,
+        date: parsdResponse.data.date
       }) 
   }
+
+  toggleLogin = () => {
+    this.setState({
+      displayLogin: !this.state.displayLogin
+    })
+  }
+
 
   render(){
     const appStyle = {
         backgroundImage: `url(${this.state.apodImgUrl})`,
-        backgroundSize: 'cover'
       }
-    console.log(this.state,"<--------state in app");
+    // console.log(this.state,"<--------state in app");
     return (
       <div style={ appStyle } className="App">
         <Header />
+        <Apod caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph}/>
+        {this.state.displayLogin? <Login toggleLogin={this.toggleLogin}/>: <Register toggleLogin={this.toggleLogin}/>}
+
       </div>
     ); 
   }
