@@ -11,9 +11,32 @@ class Login extends React.Component {
 		}
 	}
 
-	handleSubmit = (e) => {
+	handleSubmit = async (e) => {
 		e.preventDefault()
-		this.props.toggleContainer()
+		const url = `http://localhost:9000/api/v1/user/login`
+		const loginResponse = await fetch(url,{
+			method: 'POST',
+			body: JSON.stringify(this.state),
+			credentials: 'include',
+			headers: {
+		          'Content-Type': 'application/json'
+		        }
+		})
+		if(loginResponse.status !== 200){
+	        	throw Error('login not working')
+	      	} else {
+
+			    const parsed = await loginResponse.json()
+			    console.log(parsed);
+			    if (parsed.success){
+					this.props.toggleContainer(parsed.data)
+			    } else {
+			    	console.log(parsed.message);
+			    	this.setState({
+			    		message: parsed.message
+			    	})
+			    }
+	      	}
 	}
 
 	handleChange = (e) => {
@@ -23,9 +46,11 @@ class Login extends React.Component {
 	}
 
 	render(){
+		console.log(this.state,"<-----state in login");
 		return(
 			<div className='RegisterLogin'>
 				<h3>Log in!</h3>
+				<p>{this.state.message}</p>
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Field>
 						<label> username </label>

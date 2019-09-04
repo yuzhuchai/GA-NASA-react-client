@@ -21,14 +21,21 @@ class Register extends React.Component {
 		          'Content-Type': 'application/json'
 		        }
 		})
+
 		if(registerResponse.status !== 200){
-	        	throw Error('register not working')
-	      	}
-	    const parsed = await registerResponse.json()
-	    console.log(parsed);
-
-		this.props.toggleContainer(parsed.data)
-
+	       	throw Error('login not working')
+	    } else {
+		    const parsed = await registerResponse.json()
+		    console.log(parsed);
+		    if (parsed.success){
+				this.props.toggleContainer(parsed.data)
+		    } else {
+		    	console.log(parsed.message);
+		    	this.setState({
+		    		message: parsed.message
+		    	})
+		    }
+	    }
 	}
 
 	handleChange = (e) => {
@@ -42,6 +49,7 @@ class Register extends React.Component {
 		return(
 			<div className='RegisterLogin'>
 				<h3>Register!</h3>
+				<p>{this.state.message}</p>
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Field>
 						<label> username </label>
