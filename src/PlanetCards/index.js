@@ -11,16 +11,18 @@ function PlanetCards (props){
 					<Card.Description>{planet.bio}</Card.Description>
 				</Card.Content>
 				<Card.Content extra>
-			      	<Button>Adopt</Button>
+			      	<Button onClick={props.adoptPlanet.bind(null, planet.name, planet.bio)}>Adopt</Button>
 	      		</Card.Content>
 			</Card>
 		)
 	})
-
 	return (
-	    <Card.Group itemsPerRow={3}>
-	    	{planetCards}
-	    </Card.Group>
+		<div>
+			<Button onClick={props.shuffle.bind(null)}>Shuffle</Button>
+		    <Card.Group itemsPerRow={3}>
+		    	{planetCards}
+		    </Card.Group>
+	    </div>
 	)
 }
 
