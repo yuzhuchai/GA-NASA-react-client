@@ -3,7 +3,7 @@ import './App.css';
 import Header from './Header'
 import LandingContainer from './LandingContainer'
 import SelectPlanetContainer from './SelectPlanetContainer'
-
+import UserProfileContainer from './UserProfileContainer'
 
 
 class App extends React.Component {
@@ -16,7 +16,8 @@ class App extends React.Component {
       date:'',
       displayLandingPage: true,
       loggedUser: null,
-      selectPlanet: false
+      selectPlanet: false,
+      displayProfile: false 
     }
   }
 
@@ -50,7 +51,12 @@ class App extends React.Component {
     })
   }
 
-
+  togglePlanetContainer = () => {
+    this.setState({
+      selectPlanet: false,
+      displayProfile: !this.state.displayProfile
+    })
+  }
 
 
   render(){
@@ -62,7 +68,8 @@ class App extends React.Component {
       <div style={ appStyle } className="App">
         <Header />
         {this.state.displayLandingPage? <LandingContainer toggleContainer={this.toggleContainer} caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph}/>: null}
-        {this.state.selectPlanet ? <SelectPlanetContainer loggedUser={this.state.loggedUser}/> : null}
+        {this.state.selectPlanet ? <SelectPlanetContainer toggleContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser}/> : null}
+        {this.state.displayProfile ? <UserProfileContainer loggedUser={this.state.loggedUser} /> : null}
       </div>
     ); 
   }

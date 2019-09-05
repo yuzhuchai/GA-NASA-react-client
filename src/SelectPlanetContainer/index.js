@@ -8,12 +8,12 @@ class SelectPlanetContainer extends React.Component {
 		super()
 		this.state={
 			randomPlanet: [],
-
 		}
 	}
 
 	componentDidMount(){
 		this.getRandomPlanet()
+		console.log(this.props,"<------props i wanna see");
 	}
 
 
@@ -50,7 +50,7 @@ class SelectPlanetContainer extends React.Component {
 		const parsed = await createdPlanet.json()
 		console.log(parsed,'<00000000shou create the planet');
 		// need to set state or do something else. so when the button is hit, switch to a new page. 
-
+		this.props.toggleContainer()
 	}
 
 	render(){
