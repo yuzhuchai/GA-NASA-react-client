@@ -2,13 +2,14 @@ import React from 'react'
 import UserPlanet from '../UserPlanet'
 import UserPosts from '../UserPosts'
 
-class UserProfileContainer extends React.Component {
+class MainContainer extends React.Component {
 	constructor(){
 		super()
 		this.state = {
 			loggedUser: null,
 			otherUser: null,
-			planet: null 
+			planet: null,
+			planetStatus: 0
 		}
 	}
 
@@ -17,7 +18,15 @@ class UserProfileContainer extends React.Component {
 			loggedUser: this.props.loggedUser
 		})
 		this.findPlanet()
+		this.timer = setInterval(() => {
+			this.decreasePlanetHappiness()
+		}, 1000)
 	}
+
+	componentWillUnmount() {
+    	clearInterval(this.timer);
+  	}
+
 
 	findPlanet = async () => {
 		const url = `http://localhost:9000/api/v1/planet/${this.props.loggedUser._id}`
@@ -31,6 +40,7 @@ class UserProfileContainer extends React.Component {
 		const planet = parsed.data[0]
 		this.setState({
 			planet: planet,
+			planetStatus: planet.status
 		})
 	}
 
@@ -53,19 +63,25 @@ class UserProfileContainer extends React.Component {
 		})
 	}
 
+	decreasePlanetHappiness = () => {
+		this.setState({
+			planetStatus: (this.state.planetStatus-1)
+		})
+	}
+
 	render(){
 		console.log(this.state,'<------state in userprofile ');
 
 		return(
 			<div>
-				{this.state.planet ? <UserPlanet delete={this.deletePlanet} planet={this.state.planet} loggedUser={this.props.loggedUser}/>: <a onClick={this.props.togglePlanetContainer.bind(null)}>you have no planet, adopt one!</a>}
+				{this.state.planet ? <UserPlanet delete={this.deletePlanet} planet={this.state.planet} loggedUser={this.props.loggedUser} planetStatus={this.state.planetStatus}/>: <a onClick={this.props.togglePlanetContainer.bind(null)}>you have no planet, adopt one!</a>}
 				<UserPosts />
 			</div>
 		)
 	}
 }
 
-export default UserProfileContainer
+export default MainContainer
 
 // left container if for the planet,         right container is for the user posts.
 

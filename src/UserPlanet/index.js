@@ -64,7 +64,7 @@ class UserPlanet extends React.Component {
 				{this.state.planet? 
 					<Card.Content>
 						<Card.Header>{this.state.planet.name}</Card.Header>
-						<Card.Meta>Your planet happiness: {this.state.planetStatus}</Card.Meta>
+						<Card.Meta>Your planet happiness: {this.props.planetStatus}</Card.Meta>
 						<Card.Description>{this.state.planet.bio}</Card.Description>
 					</Card.Content>
 					:
