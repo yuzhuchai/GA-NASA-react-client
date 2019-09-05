@@ -7,7 +7,7 @@ class LandingContainer extends React.Component{
 	constructor(){
 		super()
 		this.state = {
-			displayLogin: false 
+			displayLogin: true 
 		}
 	}
 
@@ -25,8 +25,8 @@ class LandingContainer extends React.Component{
 				<Apod caption={this.props.caption} date={this.props.date} bio={this.props.bio} />
 				
 		        {this.state.displayLogin ? 
-		        	<Login toggleContainer={this.props.toggleContainer} toggleLogin={this.toggleLogin} /> : 
-		        	<Register toggleLogin={this.toggleLogin} toggleContainer={this.props.toggleContainer}/>
+		        	<Login toggleContainer={this.props.toggleContainer} toggleLoginContainer={this.props.toggleLoginContainer} toggleLogin={this.toggleLogin} /> : 
+		        	<Register toggleLogin={this.toggleLogin} toggleRegisterContainer={this.props.toggleRegisterContainer}/>
 		        }
 
 	        </div>

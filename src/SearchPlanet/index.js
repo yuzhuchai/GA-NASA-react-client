@@ -24,7 +24,7 @@ class SearchPlanet extends React.Component {
 			name: `Kepler-${this.state.number} ${this.state.letter}`
 		}
 		console.log(data);
-		const url = `http://localhost:9000/api/v1/planet/find`
+		const url = `http://localhost:9000/api/v1/nasadata/planet`
 		const searchedPlanet = await fetch(url, {
 			method: 'POST',
 			body: JSON.stringify(data),

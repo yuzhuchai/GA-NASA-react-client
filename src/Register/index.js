@@ -28,7 +28,7 @@ class Register extends React.Component {
 		    const parsed = await registerResponse.json()
 		    console.log(parsed);
 		    if (parsed.success){
-				this.props.toggleContainer(parsed.data)
+				this.props.toggleRegisterContainer(parsed.data)
 		    } else {
 		    	console.log(parsed.message);
 		    	this.setState({

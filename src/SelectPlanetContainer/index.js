@@ -13,12 +13,12 @@ class SelectPlanetContainer extends React.Component {
 
 	componentDidMount(){
 		this.getRandomPlanet()
-		console.log(this.props,"<------props i wanna see");
+		// console.log(this.props,"<------props i wanna see");
 	}
 
 
 	getRandomPlanet = async () => {
-		const url = `http://localhost:9000/api/v1/planet/default`
+		const url = `http://localhost:9000/api/v1/nasadata/planet`
 		const getRandomPlanet = await fetch(url, {
 			method: 'GET',
 			credientials: 'include'
@@ -48,13 +48,13 @@ class SelectPlanetContainer extends React.Component {
 		        }			
 		})
 		const parsed = await createdPlanet.json()
-		console.log(parsed,'<00000000shou create the planet');
+		// console.log(parsed,'<00000000shou create the planet and update the user');
 		// need to set state or do something else. so when the button is hit, switch to a new page. 
 		this.props.toggleContainer()
 	}
 
 	render(){
-		console.log(this.state,"<-------state in the random planet");
+		// console.log(this.state,"<-------state in the random planet");
 		return(
 			<div className='PlanetContainer'>
 				<h4>Choose a planet to adopt!! you can pick from the following cards or select your own planet</h4>

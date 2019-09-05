@@ -29,7 +29,7 @@ class Login extends React.Component {
 			    const parsed = await loginResponse.json()
 			    console.log(parsed);
 			    if (parsed.success){
-					this.props.toggleContainer(parsed.data)
+					this.props.toggleLoginContainer(parsed.data)
 			    } else {
 			    	console.log(parsed.message);
 			    	this.setState({
@@ -46,6 +46,7 @@ class Login extends React.Component {
 	}
 
 	render(){
+		console.log(this.props,'<------ props in the login container');
 		console.log(this.state,"<-----state in login");
 		return(
 			<div className='RegisterLogin'>

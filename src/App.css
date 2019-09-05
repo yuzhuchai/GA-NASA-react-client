@@ -13,7 +13,7 @@
   color: white;
 }
 
-.Apod, .RegisterLogin{
+.UserPlanet, .UserPosts, .Apod, .RegisterLogin{
   vertical-align:middle;
   display: inline-block;
 /*  height: 60vh;
@@ -44,6 +44,9 @@
 .PlanetCard{
   margin: 40px;
 }
+
+
+
 
 @keyframes App-logo-spin {
   from {

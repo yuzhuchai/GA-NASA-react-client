@@ -23,7 +23,7 @@ class App extends React.Component {
 
   componentDidMount(){
       this.getApodData()
-      console.log('this should only run once');
+      // console.log('this should only run once');
   }
 
   getApodData = async () => {
@@ -32,18 +32,17 @@ class App extends React.Component {
           credentials: 'include',
       })
       const parsdResponse = await response.json()
-      const mydata = JSON.parse(parsdResponse.data.myData)
-      console.log(parsdResponse,"<------landing page apod data");
+      // console.log(parsdResponse,"<------landing page apod data");
 
       this.setState({
         apodImgUrl: parsdResponse.data.imgUrl,
-        apodCaption: mydata.imgCaption,
-        apodParagraph: mydata.explnation,
+        apodCaption: parsdResponse.data.imgCaption,
+        apodParagraph: parsdResponse.data.explnation,
         date: parsdResponse.data.date
       }) 
   }
 
-  toggleContainer = (user) => {
+  toggleRegisterContainer = (user) => {
     this.setState({
       displayLandingPage: !this.state.displayLandingPage,
       loggedUser: user,
@@ -51,25 +50,34 @@ class App extends React.Component {
     })
   }
 
+  toggleLogInContainer = (user) => {
+    this.setState({
+      displayLandingPage: !this.state.displayLandingPage,
+      loggedUser: user,
+      displayProfile: true 
+    })
+  }
+
   togglePlanetContainer = () => {
     this.setState({
-      selectPlanet: false,
+      selectPlanet: !this.state.selectPlanet,
       displayProfile: !this.state.displayProfile
     })
   }
+
 
 
   render(){
     const appStyle = {
         backgroundImage: `url(${this.state.apodImgUrl})`,
       }
-    console.log(this.state,"<--------state in app");
+    // console.log(this.state,"<--------state in app");
     return (
       <div style={ appStyle } className="App">
         <Header />
-        {this.state.displayLandingPage? <LandingContainer toggleContainer={this.toggleContainer} caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph}/>: null}
+        {this.state.displayLandingPage? <LandingContainer toggleLoginContainer={this.toggleLogInContainer} toggleRegisterContainer={this.toggleRegisterContainer} caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph}/>: null}
         {this.state.selectPlanet ? <SelectPlanetContainer toggleContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser}/> : null}
-        {this.state.displayProfile ? <UserProfileContainer loggedUser={this.state.loggedUser} /> : null}
+        {this.state.displayProfile ? <UserProfileContainer togglePlanetContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser} /> : null}
       </div>
     ); 
   }
