@@ -38,7 +38,7 @@ class SelectPosts extends React.Component {
 
 		return(
 			<div>
-				<Card>
+				<Card fluid>
 				    <Image src={this.state.imgUrl} wrapped ui={false} />
 				    <Card.Content>
 				      <Card.Header>a lovely post from {this.state.cat}</Card.Header>
@@ -48,6 +48,8 @@ class SelectPosts extends React.Component {
 				    </Card.Content>
 				    <Card.Content extra>
 						<Button onClick={this.samplePost}>shuffle</Button>
+						<Button>Save</Button>
+						<Button>Post</Button>
 				    </Card.Content>
   				</Card>
 			</div>
