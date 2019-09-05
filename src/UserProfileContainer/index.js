@@ -23,7 +23,7 @@ class UserProfileContainer extends React.Component {
 		const url = `http://localhost:9000/api/v1/planet/${this.props.loggedUser._id}`
 		const findPlanet = await fetch(url, {
 			method: 'GET',
-			credentials: 'include'
+			credentials: 'include',
 		})
 		console.log(url);
 		const parsed = await findPlanet.json()
@@ -44,8 +44,14 @@ class UserProfileContainer extends React.Component {
 		})
 		console.log(deletePlanet);
 		this.props.togglePlanetContainer()
+		this.planetState()
 	}
 
+	// planetState = () => {
+	// 	this.setState({
+	// 		planet:null
+	// 	})
+	// }
 
 	render(){
 		console.log(this.state,'<------state in userprofile ');
