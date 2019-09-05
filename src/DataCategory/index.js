@@ -27,7 +27,7 @@ class DataCategory extends React.Component{
 
 
 	render(){
-		console.log(this.state);
+		// console.log(this.state);
 		return(
 			<div className='DataCategory'>
 			{this.state.displayCat? 

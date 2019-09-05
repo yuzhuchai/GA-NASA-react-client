@@ -5,6 +5,15 @@ class SelectPosts extends React.Component {
 		super()
 	}
 
+	componentDidMount(){
+		this.samplePost()
+	}
+
+	samplePost = () => {
+		const url = `http://localhost:9000/api/v1/nasadata/${this.props.cat}`
+		console.log(url);
+	}
+
 	render(){
 		return(
 			<div>
