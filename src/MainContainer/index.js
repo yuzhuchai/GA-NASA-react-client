@@ -1,6 +1,9 @@
 import React from 'react'
 import UserPlanet from '../UserPlanet'
 import UserPosts from '../UserPosts'
+import DataCategory from '../DataCategory'
+import PostCards from '../PostCards'
+import { Tab } from 'semantic-ui-react'
 
 class MainContainer extends React.Component {
 	constructor(){
@@ -86,6 +89,9 @@ class MainContainer extends React.Component {
 	}
 	render(){
 		// console.log(this.state,'<------state in userprofile ');
+		const panes = [
+			{ menuItem: 'featured posts', render: () => <Tab.Pane><PostCards /></Tab.Pane> },
+  			{ menuItem: 'data category', render: () => <Tab.Pane><DataCategory toggleHomePage={this.toggleHomePage}/></Tab.Pane> },]
 		return(
 			<div>
 			{this.state.showHomePage? null: 
@@ -94,9 +100,10 @@ class MainContainer extends React.Component {
 					<UserPosts toggleHomePage={this.toggleHomePage}/>
 				</div>
 			}
-			{this.state.showHomePage?  
+			{this.state.showHomePage? 
 				<div className='HomePagePost'>
-					<a onClick={this.toggleHomePage}>back to your profile page</a>
+				<a onClick={this.toggleHomePage}>back to your profile page</a> 
+					<Tab panes={panes}/>
 				</div> : null
 			}
 			</div>
