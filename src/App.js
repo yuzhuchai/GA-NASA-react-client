@@ -56,7 +56,7 @@ class App extends React.Component {
 
 
   getApodData = async () => {
-      const response = await fetch('http://localhost:9000/api/v1/nasadata/apod', {
+      const response = await fetch('http://localhost:9000/api/v1/nasadata/load/apod', {
           method: 'GET',
           credentials: 'include',
       })
