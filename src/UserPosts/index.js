@@ -10,6 +10,7 @@ class UserPosts extends React.Component {
 		return(
 			<div className='UserPosts'>
 				<h1> here are your posts. </h1>
+				<a onClick={this.props.toggleHomePage}> click here to look at some awsome data and post them!</a>
 			</div>
 		)
 	}

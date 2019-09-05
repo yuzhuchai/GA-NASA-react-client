@@ -33,7 +33,7 @@ class App extends React.Component {
     const logoutResponse = await fetch(`http://localhost:9000/api/v1/user/logout`,{
       credentials: 'include'
     })
-    console.log(logoutResponse,'<-=----logout response ');
+    // console.log(logoutResponse,'<-=----logout response ');
     this.setState({
       loggedUser: null,
       displayLandingPage: true,
@@ -50,7 +50,7 @@ class App extends React.Component {
                 'Content-Type': 'application/json'
               }
       })
-    console.log(updatePlanetStatus,'<--------updated plannet status response');
+    // console.log(updatePlanetStatus,'<--------updated plannet status response');
   }
 
 
@@ -102,7 +102,7 @@ class App extends React.Component {
   }
 
   render(){
-    console.log(this.state.planetId);
+    // console.log(this.state.planetId);
     const appStyle = {
         backgroundImage: `url(${this.state.apodImgUrl})`,
       }

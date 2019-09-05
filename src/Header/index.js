@@ -17,9 +17,7 @@ class Header extends React.Component{
 
 			<div>
 	
-											<a onClick={this.props.logout}>logout</a>
-					
-			
+				<a onClick={this.props.logout}>logout</a>	
 				<h1 className='App-header'> {header}</h1>
 			
 			</div>
