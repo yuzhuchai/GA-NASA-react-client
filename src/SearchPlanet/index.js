@@ -36,9 +36,17 @@ class SearchPlanet extends React.Component {
 
 		const parsed = await searchedPlanet.json()
 		console.log(parsed);
-		this.setState({
-			foundPlanet : [parsed.data]
-		})
+		if (parsed.success){
+			this.setState({
+				foundPlanet : [parsed.data],
+				message: ''
+			})	
+		} else {
+			this.setState({
+				message: parsed.message,
+				foundPlanet: []
+			})
+		}
 	}
 
 
@@ -58,6 +66,7 @@ class SearchPlanet extends React.Component {
 								<input type='text' value={this.state.letter} name='letter' onChange={this.handleChange}/>
 							</Form.Field>
 						<Button>find</Button>
+						<p>{this.state.message}</p>
 					</Form> 
 				</div>
 				<div className='Card'> 

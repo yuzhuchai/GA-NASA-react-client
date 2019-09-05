@@ -16,9 +16,9 @@ function PlanetCards (props){
 			</Card>
 		)
 	})
+	const len = props.randomPlanet.length 
 	return (
-		
-		    <Card.Group itemsPerRow={3}>
+		    <Card.Group itemsPerRow={len}>
 		    	{planetCards}
 		    </Card.Group>
 	)

@@ -38,6 +38,7 @@
 .Card{
   display: inline-block;
   vertical-align: middle;
+  width: 40vw;
 }
 
 .PlanetCard{
