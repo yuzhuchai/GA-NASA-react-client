@@ -20,7 +20,7 @@ class MainContainer extends React.Component {
 		this.findPlanet()
 		this.timer = setInterval(() => {
 			this.decreasePlanetHappiness()
-		}, 1000)
+		}, 4000)
 	}
 
 	componentWillUnmount() {
@@ -67,14 +67,22 @@ class MainContainer extends React.Component {
 		this.setState({
 			planetStatus: (this.state.planetStatus-1)
 		})
+		this.props.changePlanetStatus(this.state.planetStatus-1, this.state.planet._id)
+	}
+
+	increasePlanetHappiness = () => {
+		this.setState({
+			planetStatus: (this.state.planetStatus+5)
+		})
+		this.props.changePlanetStatus(this.state.planetStatus+5)
 	}
 
 	render(){
-		console.log(this.state,'<------state in userprofile ');
+		// console.log(this.state,'<------state in userprofile ');
 
 		return(
 			<div>
-				{this.state.planet ? <UserPlanet delete={this.deletePlanet} planet={this.state.planet} loggedUser={this.props.loggedUser} planetStatus={this.state.planetStatus}/>: <a onClick={this.props.togglePlanetContainer.bind(null)}>you have no planet, adopt one!</a>}
+				{this.state.planet ? <UserPlanet increasePlanetHappiness={this.increasePlanetHappiness} delete={this.deletePlanet} planet={this.state.planet} loggedUser={this.props.loggedUser} planetStatus={this.state.planetStatus}/>: <a onClick={this.props.togglePlanetContainer}>you have no planet, adopt one!</a>}
 				<UserPosts />
 			</div>
 		)

@@ -17,7 +17,9 @@ class App extends React.Component {
       displayLandingPage: true,
       loggedUser: null,
       selectPlanet: false,
-      displayProfile: false 
+      displayProfile: false,
+      planetStatus: 0,
+      planetId: null
     }
   }
 
@@ -25,6 +27,33 @@ class App extends React.Component {
       this.getApodData()
       // console.log('this should only run once');
   }
+
+
+  logout = async () => {
+    const logoutResponse = await fetch(`http://localhost:9000/api/v1/user/logout`,{
+      credentials: 'include'
+    })
+    console.log(logoutResponse,'<-=----logout response ');
+    this.setState({
+      loggedUser: null,
+      displayLandingPage: true,
+      selectPlanet: false,
+      displayProfile: false,
+    })
+
+    // so right here when i log out i have to save the planet status. 
+    const updatePlanetStatus = await fetch(`http://localhost:9000/api/v1/planet/status/${this.state.planetId}`,{
+          method: 'PUT',
+          credentials: 'include',
+          body: JSON.stringify({status:this.state.planetStatus}),
+          headers: {
+                'Content-Type': 'application/json'
+              }
+      })
+    console.log(updatePlanetStatus,'<--------updated plannet status response');
+  }
+
+
 
   getApodData = async () => {
       const response = await fetch('http://localhost:9000/api/v1/nasadata/apod', {
@@ -65,19 +94,25 @@ class App extends React.Component {
     })
   }
 
-
+  changePlanetStatus = (num, planetId) => {
+    this.setState({
+        planetStatus: num,
+        planetId: planetId
+    })
+  }
 
   render(){
+    console.log(this.state.planetId);
     const appStyle = {
         backgroundImage: `url(${this.state.apodImgUrl})`,
       }
     // console.log(this.state,"<--------state in app");
     return (
       <div style={ appStyle } className="App">
-        <Header />
+        <Header logout={this.logout}/>
         {this.state.displayLandingPage? <LandingContainer toggleLoginContainer={this.toggleLogInContainer} toggleRegisterContainer={this.toggleRegisterContainer} caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph}/>: null}
         {this.state.selectPlanet ? <SelectPlanetContainer toggleContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser}/> : null}
-        {this.state.displayProfile ? <MainContainer togglePlanetContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser} /> : null}
+        {this.state.displayProfile ? <MainContainer changePlanetStatus={this.changePlanetStatus} togglePlanetContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser} /> : null}
       </div>
     ); 
   }

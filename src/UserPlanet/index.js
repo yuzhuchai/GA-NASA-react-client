@@ -5,7 +5,7 @@ class UserPlanet extends React.Component {
 	constructor(){
 		super()
 		this.state = {
-			planetStatus: 0,
+			// planetStatus: 0,
 			planetName:'',
 			planetBio:'',
 			planet: null
@@ -15,7 +15,7 @@ class UserPlanet extends React.Component {
 
 	componentDidMount(){
 		this.setState({
-			planetStatus: this.props.planet.status,
+			// planetStatus: this.props.planet.status,
 			planetName:this.props.planet.name,
 			planetBio:this.props.planet.bio,
 			planet: this.props.planet 
@@ -86,8 +86,8 @@ class UserPlanet extends React.Component {
 								</Form> 
 							</Modal.Content>
 						</Modal>
-				      	
 				      	<Button onClick={this.props.delete}>Delete</Button>
+				      	<Button onClick={this.props.increasePlanetHappiness.bind()}>play with Planet</Button>
 		      		</Card.Content>
 				</Card>
 			</div>

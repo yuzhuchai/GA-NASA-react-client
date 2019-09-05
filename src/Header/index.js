@@ -9,27 +9,19 @@ class Header extends React.Component{
 			loggedUser: null
 		}
 	}
-	// const style = {
-	// 	color: 'white'
-	// }
 
-	// logOut = 
 	render(){
 		const header = "{YUZHU'S AWESOME SITE}"
 
 		return(
 
 			<div>
-				{this.state.loggedUser? 
-					<div>
-						<p>welcome! {this.state.loggedUser.username}</p>
-						<a onClick={this.logout}>logout</a>
-					</div> 
-					:
-					<a>login</a>
-				}
+	
+											<a onClick={this.props.logout}>logout</a>
+					
+			
 				<h1 className='App-header'> {header}</h1>
-				}
+			
 			</div>
 		)
 	}
