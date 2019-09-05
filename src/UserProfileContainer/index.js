@@ -47,18 +47,18 @@ class UserProfileContainer extends React.Component {
 		this.planetState()
 	}
 
-	// planetState = () => {
-	// 	this.setState({
-	// 		planet:null
-	// 	})
-	// }
+	planetState = () => {
+		this.setState({
+			planet:null
+		})
+	}
 
 	render(){
 		console.log(this.state,'<------state in userprofile ');
 
 		return(
 			<div>
-				{this.state.planet ? <UserPlanet delete={this.deletePlanet} planet={this.state.planet} loggedUser={this.props.loggedUser}/>: <p>you have no planet, adopt one!</p>}
+				{this.state.planet ? <UserPlanet delete={this.deletePlanet} planet={this.state.planet} loggedUser={this.props.loggedUser}/>: <a onClick={this.props.togglePlanetContainer.bind(null)}>you have no planet, adopt one!</a>}
 				<UserPosts />
 			</div>
 		)
