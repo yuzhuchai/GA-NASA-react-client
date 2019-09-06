@@ -23,7 +23,7 @@ class SelectPosts extends React.Component {
 		})
 		// console.log(response,'<------responsne of the data');
 		const parsed = await response.json()
-		console.log(parsed,'<----parsed response i wanna seee!!!!');
+		// console.log(parsed,'<----parsed response i wanna seee!!!!');
 		// parsed.data.imgUrl is the img
 		//.content is the content 
 		this.setState({
@@ -34,8 +34,28 @@ class SelectPosts extends React.Component {
 
 	}
 
-	render(){
 
+	savePostToUser = async () => {
+		const url = `http://localhost:9000/api/v1/post`
+		const data = {
+			content: this.state.content,
+			imgUrl: this.state.imgUrl,
+			cat: this.state.cat
+		}
+		const createdPostReaponse = await fetch(url,{
+			method: 'POST',
+			credentials: 'include',
+			body: JSON.stringify(data),
+			headers: {
+		          'Content-Type': 'application/json'
+		   	}	
+		})
+		const parsed = await createdPostReaponse.json()
+		console.log(parsed,'<-----createdpostresponse');
+	}
+
+	render(){
+		// console.log(this.state,'<-------state in select posts');
 		return(
 			<div>
 				<Card fluid>
@@ -48,8 +68,7 @@ class SelectPosts extends React.Component {
 				    </Card.Content>
 				    <Card.Content extra>
 						<Button onClick={this.samplePost}>shuffle</Button>
-						<Button>Save</Button>
-						<Button>Post</Button>
+						<Button onClick={this.savePostToUser}>Post</Button>
 				    </Card.Content>
   				</Card>
 			</div>
