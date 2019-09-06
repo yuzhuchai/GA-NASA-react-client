@@ -19,7 +19,8 @@ class PostCards  extends React.Component {
 		})
 	}
 
-	createComment = async (postid) => {
+	createComment = async (postid,e) => {
+		e.preventDefault()
 		console.log(postid,"<-----postid");
 		console.log(this.state.comment);
 		const data = {content: this.state.comment}
@@ -36,8 +37,10 @@ class PostCards  extends React.Component {
 		console.log(parsed,'>>>>>>>>> better see some comments');
 		this.setState({
 			comment: '',
-			displayfrom: false 
+			showmodal: false
 		})
+
+		// need to give this commet back to the state so it can display 
 	}
 
 	handleModal=() => {
@@ -54,6 +57,11 @@ class PostCards  extends React.Component {
 
 	// console.log(props,'<======postcards');
 		const postList = this.props.posts.map((post,i) => {
+			const commentList = post.comments.map(comment => {
+				return (
+					<p key={comment._id}>{comment.content} on {comment.date} by {comment.user.username}</p>
+				)
+			})
 			const subStr = post.content.substring(0,50)
 			return(
 				<Card key={post._id}>
@@ -66,9 +74,9 @@ class PostCards  extends React.Component {
 				        <Card.Header>a message from {post.cat}</Card.Header>
 						
 						{this.props.loggedUser.username !== post.user.username ?
-							<Card.Meta><strong><a onClick={this.props.goToUserPage.bind(null, post.user)}>{post.user.username}</a></strong> posted on {post.date}</Card.Meta>
+							<Card.Meta>posted by <strong><a onClick={this.props.goToUserPage.bind(null, post.user)}>{post.user.username}</a></strong> on {post.date}</Card.Meta>
 						: 
-							<Card.Meta>posted on {post.date}</Card.Meta>
+							<Card.Meta>posted by you on {post.date}</Card.Meta>
 						}
 				        
 				        <Card.Description>
@@ -82,9 +90,12 @@ class PostCards  extends React.Component {
 			    				<Image size='medium' src={post.img} spaced='left' floated='left'/>
 			    				<p>{post.content}</p>
 			    			</Modal.Content>
+			    			<Modal.Description>
+			    				{commentList}
+			    			</Modal.Description>
 			    			<Form onSubmit={this.createComment.bind(null, post._id)}>
 				         		<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
-				       			<Button onClick={this.handleModal}>submit</Button>
+				       			<Button>submit</Button>
 				        	</Form>
 				        	<Button onClick={this.handleModal}>LIKE</Button>
 			    		</Modal>
