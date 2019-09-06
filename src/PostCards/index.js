@@ -64,6 +64,14 @@ class PostCards  extends React.Component {
 							<Comment.Author as='a'>{comment.user.username}</Comment.Author>
 							<Comment.Metadata>on {comment.date}</Comment.Metadata>
 							<Comment.Text>{comment.content}</Comment.Text>
+							{this.props.loggedUser.username === comment.user.username ? 
+								<Comment.Actions>
+									<Comment.Action>delete</Comment.Action>
+									<Comment.Action>edit</Comment.Action>
+								</Comment.Actions>
+							:
+							null 
+							}
 						</Comment.Content>
 					</Comment>
 				)
@@ -93,7 +101,7 @@ class PostCards  extends React.Component {
 			    	<Card.Content extra>
 			    		<Modal trigger={<Button onClick={this.handleModal}>SHOW POST</Button>} open={this.state.showmodal} onClose={this.handleModal}>
 			    			<Modal.Content>
-			    				<Image size='medium' src={post.img} spaced='left' floated='left'/>
+			    				<Image size='medium' src={post.img} floated='left'/>
 			    				<p>{post.content}</p>
 			    			</Modal.Content>
 			    			<Modal.Description>
