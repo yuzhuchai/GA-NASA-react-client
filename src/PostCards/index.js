@@ -19,6 +19,14 @@ class PostCards  extends React.Component {
 		})
 	}
 
+	deleteComment = async (id) => {
+		console.log(id,'<-----comment id to delete');
+	}
+
+	editComment = async (id) => {
+		console.log(id,'<----- comment id to edit');
+	}
+
 	createComment = async (postid,e) => {
 		e.preventDefault()
 		console.log(postid,"<-----postid");
@@ -66,8 +74,8 @@ class PostCards  extends React.Component {
 							<Comment.Text>{comment.content}</Comment.Text>
 							{this.props.loggedUser.username === comment.user.username ? 
 								<Comment.Actions>
-									<Comment.Action>delete</Comment.Action>
-									<Comment.Action>edit</Comment.Action>
+									<Comment.Action onClick={this.deleteComment.bind(null, comment._id)}>delete</Comment.Action>
+									<Comment.Action onClick={this.editComment.bind(null, comment._id)}>edit</Comment.Action>
 								</Comment.Actions>
 							:
 							null 
