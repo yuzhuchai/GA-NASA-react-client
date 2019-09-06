@@ -55,7 +55,7 @@ class UserPlanet extends React.Component {
 	}
 
 	render(){
-		// console.log(this.props,'<-======props in userplanet ');
+		console.log(this.props,'<-======props in userplanet ');
 		// console.log(this.state,"<-----this.state in user planet");
 		return(
 			<div className='UserPlanet'>

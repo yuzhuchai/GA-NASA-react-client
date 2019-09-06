@@ -32,7 +32,7 @@ class FeaturedPosts extends React.Component {
 		console.log(this.state);
 		return(
 			<div>
-			{this.state.allPosts.length? <PostCards posts={this.state.allPosts}/> : null }
+			{this.state.allPosts.length? <PostCards loggedUser={this.props.loggedUser} goToUserPage={this.props.goToUserPage} posts={this.state.allPosts}/> : null }
 				
 
 			</div>

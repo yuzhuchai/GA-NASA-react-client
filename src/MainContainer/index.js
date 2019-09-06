@@ -86,6 +86,14 @@ class MainContainer extends React.Component {
 
 	toggleHomePage = () => {
 		this.setState({
+			showHomePage: !this.state.showHomePage,
+			otherUser: null
+		})
+	}
+
+	goToUserPage = (user) => {
+		this.setState({
+			otherUser: user,
 			showHomePage: !this.state.showHomePage
 		})
 	}
@@ -94,13 +102,24 @@ class MainContainer extends React.Component {
 	render(){
 		console.log(this.state,'<------state in userprofile ');
 		const panes = [
-			{ menuItem: 'featured posts', render: () => <Tab.Pane><FeaturedPosts /></Tab.Pane> },
+			{ menuItem: 'featured posts', render: () => <Tab.Pane><FeaturedPosts goToUserPage={this.goToUserPage} loggedUser={this.state.loggedUser}/></Tab.Pane> },
   			{ menuItem: 'data category', render: () => <Tab.Pane><DataCategory toggleHomePage={this.toggleHomePage}/></Tab.Pane> },]
 		return(
 			<div>
 			{this.state.showHomePage? null: 
 				<div className='UserProefileGroup'>
-					{this.state.planet ? <UserPlanet increasePlanetHappiness={this.increasePlanetHappiness} delete={this.deletePlanet} planet={this.state.planet} loggedUser={this.props.loggedUser} planetStatus={this.state.planetStatus}/>: <a onClick={this.props.togglePlanetContainer}>you have no planet, adopt one!</a>}
+					{this.state.planet ? <UserPlanet 
+						increasePlanetHappiness={this.increasePlanetHappiness} 
+						delete = {this.deletePlanet} 
+						planet = {this.state.planet} 
+						loggedUser = {this.props.loggedUser}
+						otherUser = {this.state.otherUser} 
+						planetStatus={this.state.planetStatus}/>
+						: 
+						<a onClick={this.props.togglePlanetContainer}>
+						you have no planet, adopt one!
+						</a>
+					}
 					<UserPosts toggleHomePage={this.toggleHomePage}/>
 				</div>
 			}

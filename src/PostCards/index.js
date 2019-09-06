@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Image, Button } from 'semantic-ui-react'
 
 function PostCards (props){
-	// this is a function displaying a list of posts it will be used for all the places that need to display posts by passing down an array of posts. 
+	// this is a function displaying a list of posts it will be used for all the places that need to display posts by passing down an array of posts.
 	console.log(props,'<======postcards');
 	const postList = props.posts.map(post => {
 		const subStr = post.content.substring(0,50)
@@ -15,7 +15,12 @@ function PostCards (props){
 		          src={post.imgUrl}
 		        />
 		        <Card.Header>a message from {post.cat}</Card.Header>
-		        <Card.Meta>posted by <a>{post.user.username}</a> on {post.date}</Card.Meta>
+				{props.loggedUser.username !== post.user.username ?
+					<Card.Meta>posted by <strong><a onClick={props.goToUserPage.bind(null, post.user)}>{post.user.username}</a></strong> on {post.date}</Card.Meta>
+				: 
+					<Card.Meta>posted by you on {post.date}</Card.Meta>
+				}
+		        
 		        <Card.Description>
 		          {subStr}
 		        </Card.Description>
