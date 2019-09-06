@@ -4,6 +4,7 @@ import UserPosts from '../UserPosts'
 import DataCategory from '../DataCategory'
 import PostCards from '../PostCards'
 import { Tab } from 'semantic-ui-react'
+import FeaturedPosts from '../FeaturedPosts'
 
 class MainContainer extends React.Component {
 	constructor(){
@@ -13,7 +14,7 @@ class MainContainer extends React.Component {
 			otherUser: null,
 			planet: null,
 			planetStatus: 0,
-			showHomePage: false 
+			showHomePage: false,
 		}
 	}
 
@@ -25,6 +26,7 @@ class MainContainer extends React.Component {
 		this.timer = setInterval(() => {
 			this.decreasePlanetHappiness()
 		}, 4000)
+
 	}
 
 	componentWillUnmount() {
@@ -87,10 +89,12 @@ class MainContainer extends React.Component {
 			showHomePage: !this.state.showHomePage
 		})
 	}
+
+
 	render(){
-		// console.log(this.state,'<------state in userprofile ');
+		console.log(this.state,'<------state in userprofile ');
 		const panes = [
-			{ menuItem: 'featured posts', render: () => <Tab.Pane><PostCards /></Tab.Pane> },
+			{ menuItem: 'featured posts', render: () => <Tab.Pane><FeaturedPosts /></Tab.Pane> },
   			{ menuItem: 'data category', render: () => <Tab.Pane><DataCategory toggleHomePage={this.toggleHomePage}/></Tab.Pane> },]
 		return(
 			<div>
