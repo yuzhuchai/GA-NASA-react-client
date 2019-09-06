@@ -7,18 +7,20 @@ class UserPosts extends React.Component {
 			user: null,
 			loggedUser: null
 		}
-
 	}
 	componentDidMount(){
-		this.setState({
-			user: this.props.user,
-			loggedUser: this.props.loggedUser
-		})
+		// this.getPosts(this.props.allposts)
+		console.log(this.props ,'<------this.props');
 	}
 
+	getPosts = (allposts) => {
+		const posts = allposts.filter(post => post.user === this.props.loggedUser)
+		console.log(posts);
+	}
 
 	render(){
-		console.log(this.state,'<========props in the user possts container');
+
+		console.log(this.props,'<========props in the user possts container');
 		return(
 			<div className='UserPosts'>
 				<h1> here are your posts. </h1>

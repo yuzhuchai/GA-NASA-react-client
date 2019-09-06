@@ -4,7 +4,6 @@ import UserPosts from '../UserPosts'
 import DataCategory from '../DataCategory'
 import PostCards from '../PostCards'
 import { Tab } from 'semantic-ui-react'
-import FeaturedPosts from '../FeaturedPosts'
 
 class MainContainer extends React.Component {
 	constructor(){
@@ -146,7 +145,8 @@ class MainContainer extends React.Component {
 					toggleHomePage={this.toggleHomePage} 
 					user={this.state.user} 
 					loggedUser={this.state.loggedUser}
-					userPosts={this.state.userPosts}/>
+					userPosts={this.state.userPosts}
+					allPosts={this.state.allPosts}/>
 				</div>
 			}
 			{this.state.showHomePage? 
