@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Image, Button, Form, } from 'semantic-ui-react'
+import { Card, Image, Button, Form, Modal } from 'semantic-ui-react'
 
 class PostCards  extends React.Component {
 	// this is a function displaying a list of posts it will be used for all the places that need to display posts by passing down an array of posts.
@@ -7,7 +7,9 @@ class PostCards  extends React.Component {
 	constructor(){
 		super()
 		this.state={
-			comment: ''
+			comment: '',
+			displayfrom: false,
+			showmodal: false
 		}
 	}
 
@@ -33,10 +35,21 @@ class PostCards  extends React.Component {
 		const parsed = await createComment.json()
 		console.log(parsed,'>>>>>>>>> better see some comments');
 		this.setState({
-			comment: ''
+			comment: '',
+			displayfrom: false 
 		})
 	}
 
+	handleModal=() => {
+		this.setState({
+			showmodal: !this.state.showmodal
+		})
+	}
+	displayFrom = () => {
+		this.setState({
+			displayfrom: !this.state.displayfrom
+		})
+	}
 	render(){
 
 	// console.log(props,'<======postcards');
@@ -64,16 +77,21 @@ class PostCards  extends React.Component {
 			    	</Card.Content>
 
 			    	<Card.Content extra>
-				         <Form onSubmit={this.createComment.bind(null, post._id)}>
-				         	<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
-				       		<Button>submit</Button>
-				         </Form>
-				         <Button>like</Button>
-			    	</Card.Content>
+			    		<Modal trigger={<Button onClick={this.handleModal}>SHOW POST</Button>} open={this.state.showmodal} onClose={this.handleModal}>
+			    			<Modal.Content>
+			    				<Image size='medium' src={post.img} spaced='left' floated='left'/>
+			    				<p>{post.content}</p>
+			    			</Modal.Content>
+			    			<Form onSubmit={this.createComment.bind(null, post._id)}>
+				         		<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
+				       			<Button onClick={this.handleModal}>submit</Button>
+				        	</Form>
+				        	<Button onClick={this.handleModal}>LIKE</Button>
+			    		</Modal>
+				    </Card.Content>
 			    </Card>
 			)
 		})
-
 
 		return(
 			<div className='PostCards'>
