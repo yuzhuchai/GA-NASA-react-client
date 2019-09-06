@@ -14,7 +14,8 @@ class MainContainer extends React.Component {
 			planet: null,
 			planetStatus: 0,
 			showHomePage: false,
-			allPosts:[]
+			allPosts:[],
+			userPost:[]
 		}
 	}
 
@@ -24,7 +25,7 @@ class MainContainer extends React.Component {
 			user: this.props.user
 		})
 		this.findAllPosts()
-		this.findPlanet(this.props.user)
+		this.findPlanetAndPosts(this.props.user)
 		this.timer = setInterval(() => {
 			this.decreasePlanetHappiness()
 		}, 4000)
@@ -51,7 +52,7 @@ class MainContainer extends React.Component {
 
 	}
 
-	findPlanet = async (user) => {
+	findPlanetAndPosts = async (user) => {
 		const url = `http://localhost:9000/api/v1/planet/${user._id}`
 		const findPlanet = await fetch(url, {
 			method: 'GET',
@@ -61,11 +62,22 @@ class MainContainer extends React.Component {
 		const parsed = await findPlanet.json()
 		// console.log(parsed,'<------parsed data of uer planet');
 		const planet = parsed.data[0]
+		
+		// console.log(user,'<0000000user in the findPlanet');
+
+		const postUrl = `http://localhost:9000/api/v1/post/user/${user._id}`
+		const findPost = await fetch(postUrl,{
+			method: 'GET',
+			credentials: 'include'
+		})
+		const parsedPosts = await findPost.json();
+		// console.log(parsedPosts,'<-------parsedPosts   ahskljaskdajs;dalsj;adajs;ajd');
+		// console.log(userPost,'<======userpost');	
 		this.setState({
 			planet: planet,
-			planetStatus: planet.status
+			planetStatus: planet.status,
+			userPosts: [...parsedPosts.data]
 		})
-		console.log(user,'<0000000user in the findPlanet');
 	}
 
 
@@ -115,43 +127,50 @@ class MainContainer extends React.Component {
 			showHomePage: false
 		})
 		// console.log(user,"<askljdaskas jjjj    need to see this ")
-		this.findPlanet(user)
+		this.findPlanetAndPosts(user)
 	}
 
 
 	render(){
-		// console.log(this.state,'<------state in userprofile ');
+		console.log(this.state,'<------state in userprofile ');
 		const panes = [
 			{ menuItem: 'featured posts', render: () => <Tab.Pane>{this.state.allPosts.length? <PostCards loggedUser={this.props.loggedUser} goToUserPage={this.goToUserPage} posts={this.state.allPosts}/> : null }</Tab.Pane> },
   			{ menuItem: 'data category', render: () => <Tab.Pane><DataCategory toggleHomePage={this.toggleHomePage}/></Tab.Pane> },]
 		return(
 			<div>
+			{this.state.user !== this.props.loggedUser? 
+				<a onClick={this.goToUserPage.bind(null, this.props.loggedUser)}>back to your profile page</a> 
+			: null
+			}
 			{this.state.showHomePage ? null: 
-				<div className='UserProefileGroup'>
-					{this.state.planet ? <UserPlanet 
-						increasePlanetHappiness={this.increasePlanetHappiness} 
-						delete = {this.deletePlanet} 
-						planet = {this.state.planet} 
-						loggedUser = {this.props.loggedUser}
-						user = {this.state.user} 
-						goToUserPage = {this.goToUserPage}
-						planetStatus={this.state.planetStatus}/>
-						: 
-						<a onClick={this.props.togglePlanetContainer}>
-						you have no planet, adopt one!
-						</a>
-					}
-					<UserPosts 
-					toggleHomePage={this.toggleHomePage} 
-					user={this.state.user} 
-					loggedUser={this.state.loggedUser}
-					userPosts={this.state.userPosts}
-					allPosts={this.state.allPosts}/>
+				<div>
+					<a onClick={this.toggleHomePage}> click here to look at some awsome data and post them!</a>
+					<div className='UserProefileGroup'>
+						{this.state.planet ? <UserPlanet 
+							increasePlanetHappiness={this.increasePlanetHappiness} 
+							delete = {this.deletePlanet} 
+							planet = {this.state.planet} 
+							loggedUser = {this.props.loggedUser}
+							user = {this.state.user} 
+							goToUserPage = {this.goToUserPage}
+							planetStatus={this.state.planetStatus}/>
+							: 
+							<a onClick={this.props.togglePlanetContainer}>
+							you have no planet, adopt one!
+							</a>
+						}
+						<UserPosts 
+						goToUserPage={this.goToUserPage}
+						toggleHomePage={this.toggleHomePage} 
+						user={this.state.user} 
+						loggedUser={this.state.loggedUser}
+						userPosts={this.state.userPosts}/>
+					</div>
 				</div>
 			}
 			{this.state.showHomePage? 
 				<div className='HomePagePost'>
-				<a onClick={this.toggleHomePage}>back to your profile page</a> 
+				<a onClick={this.goToUserPage.bind(null, this.props.loggedUser)}>back to your profile page</a> 
 					<Tab panes={panes}/>
 				</div> : null
 			}

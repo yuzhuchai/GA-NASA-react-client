@@ -1,4 +1,5 @@
 import React from 'react'
+import PostCards from '../PostCards'
 
 class UserPosts extends React.Component {
 	constructor(){
@@ -8,23 +9,23 @@ class UserPosts extends React.Component {
 			loggedUser: null
 		}
 	}
-	componentDidMount(){
-		// this.getPosts(this.props.allposts)
-		console.log(this.props ,'<------this.props');
-	}
 
-	getPosts = (allposts) => {
-		const posts = allposts.filter(post => post.user === this.props.loggedUser)
-		console.log(posts);
-	}
 
 	render(){
 
 		console.log(this.props,'<========props in the user possts container');
 		return(
 			<div className='UserPosts'>
-				<h1> here are your posts. </h1>
-				<a onClick={this.props.toggleHomePage}> click here to look at some awsome data and post them!</a>
+			{this.props.userPosts? 
+				<div>
+					{this.props.user === this.props.loggedUser? 
+						<h1> here are your posts. </h1>
+					:
+						<h1> here are {this.props.user.username}'s posts.</h1>
+					}
+					<PostCards posts={this.props.userPosts} user={this.props.user} loggedUser={this.props.loggedUser} goToUserPage={this.props.goToUserPage}/> 
+				</div>
+			: null}
 			</div>
 		)
 	}

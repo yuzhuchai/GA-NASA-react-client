@@ -1,52 +1,92 @@
 import React from 'react'
-import { Card, Image, Button } from 'semantic-ui-react'
+import { Card, Image, Button, Form, } from 'semantic-ui-react'
 
-function PostCards (props){
+class PostCards  extends React.Component {
 	// this is a function displaying a list of posts it will be used for all the places that need to display posts by passing down an array of posts.
-	console.log(props,'<======postcards');
-	const postList = props.posts.map(post => {
-		const subStr = post.content.substring(0,50)
+
+	constructor(){
+		super()
+		this.state={
+			comment: ''
+		}
+	}
+
+	handleChange= (e) => {
+		this.setState({
+			[e.target.name]: e.target.value
+		})
+	}
+
+	createComment = async (postid) => {
+		console.log(postid,"<-----postid");
+		console.log(this.state.comment);
+		const data = {content: this.state.comment}
+		const url =	`http://localhost:9000/api/v1/comment/${postid}`
+		const createComment = await fetch(url, {
+			method: 'POST',
+			body: JSON.stringify(data),
+			credentials: 'include',
+			headers: {
+		        'Content-Type': 'application/json'
+		    }
+		})
+		const parsed = await createComment.json()
+		console.log(parsed,'>>>>>>>>> better see some comments');
+		this.setState({
+			comment: ''
+		})
+	}
+
+	render(){
+
+	// console.log(props,'<======postcards');
+		const postList = this.props.posts.map((post,i) => {
+			const subStr = post.content.substring(0,50)
+			return(
+				<Card key={post._id}>
+		    		<Card.Content>
+				        <Image
+				          floated='right'
+				          size='mini'
+				          src={post.img}
+				        />
+				        <Card.Header>a message from {post.cat}</Card.Header>
+						
+						{this.props.loggedUser.username !== post.user.username ?
+							<Card.Meta><strong><a onClick={this.props.goToUserPage.bind(null, post.user)}>{post.user.username}</a></strong> posted on {post.date}</Card.Meta>
+						: 
+							<Card.Meta>posted on {post.date}</Card.Meta>
+						}
+				        
+				        <Card.Description>
+				        	{subStr}...
+				        </Card.Description>
+			    	</Card.Content>
+
+			    	<Card.Content extra>
+				         <Form onSubmit={this.createComment.bind(null, post._id)}>
+				         	<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
+				       		<Button>submit</Button>
+				         </Form>
+				         <Button>like</Button>
+			    	</Card.Content>
+			    </Card>
+			)
+		})
+
+
 		return(
-			<Card key={post._id}>
-		      <Card.Content>
-		        <Image
-		          floated='right'
-		          size='mini'
-		          src={post.imgUrl}
-		        />
-		        <Card.Header>a message from {post.cat}</Card.Header>
-				{props.loggedUser.username !== post.user.username ?
-					<Card.Meta>posted by <strong><a onClick={props.goToUserPage.bind(null, post.user)}>{post.user.username}</a></strong> on {post.date}</Card.Meta>
-				: 
-					<Card.Meta>posted by you on {post.date}</Card.Meta>
-				}
-		        
-		        <Card.Description>
-		          {subStr}
-		        </Card.Description>
-		      </Card.Content>
-		      <Card.Content extra>
-		        <div className='ui two buttons'>
-		          <Button basic color='red'>
-		            like 
-		          </Button>
-		          <Button basic color='blue'>
-		            comment 
-		          </Button>
-		        </div>
-		      </Card.Content>
-		    </Card>
+			<div className='PostCards'>
+				{this.props.loggedUser ? 
+					<Card.Group>
+						{postList}
+					</Card.Group>
+				:
+					null
+				}	
+			</div>
 		)
-	})
-
-
-	return(
-		<div className='PostCards'>
-			<Card.Group>
-				{postList}
-			</Card.Group>
-		</div>
-	)
+	}
 }
 
 export default PostCards

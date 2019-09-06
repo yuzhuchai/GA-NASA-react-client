@@ -67,7 +67,7 @@ class UserPlanet extends React.Component {
 				: 
 					<div>
 						<h3>here is {this.props.user.username}'s baby planet</h3>
-						<a onClick={this.handleClick}>back to your profile page</a>
+						
 					</div>
 				}
 				
