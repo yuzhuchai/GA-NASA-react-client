@@ -15,6 +15,7 @@ class MainContainer extends React.Component {
 			planet: null,
 			planetStatus: 0,
 			showHomePage: false,
+			allPosts:[]
 		}
 	}
 
@@ -23,6 +24,7 @@ class MainContainer extends React.Component {
 			loggedUser: this.props.loggedUser,
 			user: this.props.user
 		})
+		this.findAllPosts()
 		this.findPlanet(this.props.user)
 		this.timer = setInterval(() => {
 			this.decreasePlanetHappiness()
@@ -34,6 +36,21 @@ class MainContainer extends React.Component {
     	clearInterval(this.timer);
   	}
 
+
+  	findAllPosts = async () => {
+	// this function will find all the posts and select couple of them randomly. set state and then pass them down as props to the postCards
+		const url = `http://localhost:9000/api/v1/post`
+		const findAllPosts = await fetch(url,{
+			method: 'GET',
+			credentials: 'include'
+		})
+		const parsed = await findAllPosts.json()
+		// console.log(parsed,'<-------found all the posts');
+		this.setState({
+			allPosts: parsed.data
+		})
+
+	}
 
 	findPlanet = async (user) => {
 		const url = `http://localhost:9000/api/v1/planet/${user._id}`
@@ -106,7 +123,7 @@ class MainContainer extends React.Component {
 	render(){
 		// console.log(this.state,'<------state in userprofile ');
 		const panes = [
-			{ menuItem: 'featured posts', render: () => <Tab.Pane><FeaturedPosts goToUserPage={this.goToUserPage} loggedUser={this.state.loggedUser}/></Tab.Pane> },
+			{ menuItem: 'featured posts', render: () => <Tab.Pane>{this.state.allPosts.length? <PostCards loggedUser={this.props.loggedUser} goToUserPage={this.goToUserPage} posts={this.state.allPosts}/> : null }</Tab.Pane> },
   			{ menuItem: 'data category', render: () => <Tab.Pane><DataCategory toggleHomePage={this.toggleHomePage}/></Tab.Pane> },]
 		return(
 			<div>
@@ -125,7 +142,11 @@ class MainContainer extends React.Component {
 						you have no planet, adopt one!
 						</a>
 					}
-					<UserPosts toggleHomePage={this.toggleHomePage}/>
+					<UserPosts 
+					toggleHomePage={this.toggleHomePage} 
+					user={this.state.user} 
+					loggedUser={this.state.loggedUser}
+					userPosts={this.state.userPosts}/>
 				</div>
 			}
 			{this.state.showHomePage? 
