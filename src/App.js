@@ -19,7 +19,8 @@ class App extends React.Component {
       selectPlanet: false,
       displayProfile: false,
       planetStatus: 0,
-      planetId: null
+      planetId: null,
+      user: null
     }
   }
 
@@ -75,7 +76,8 @@ class App extends React.Component {
     this.setState({
       displayLandingPage: !this.state.displayLandingPage,
       loggedUser: user,
-      selectPlanet: !this.state.selectPlanet
+      selectPlanet: !this.state.selectPlanet,
+      user: user
     })
   }
 
@@ -83,7 +85,8 @@ class App extends React.Component {
     this.setState({
       displayLandingPage: !this.state.displayLandingPage,
       loggedUser: user,
-      displayProfile: true 
+      displayProfile: true,
+      user: user
     })
   }
 
@@ -112,7 +115,7 @@ class App extends React.Component {
         <Header logout={this.logout}/>
         {this.state.displayLandingPage? <LandingContainer toggleLoginContainer={this.toggleLogInContainer} toggleRegisterContainer={this.toggleRegisterContainer} caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph}/>: null}
         {this.state.selectPlanet ? <SelectPlanetContainer toggleContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser}/> : null}
-        {this.state.displayProfile ? <MainContainer changePlanetStatus={this.changePlanetStatus} togglePlanetContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser} /> : null}
+        {this.state.displayProfile ? <MainContainer changePlanetStatus={this.changePlanetStatus} user={this.state.user} togglePlanetContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser} /> : null}
       </div>
     ); 
   }

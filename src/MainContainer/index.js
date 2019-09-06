@@ -11,7 +11,7 @@ class MainContainer extends React.Component {
 		super()
 		this.state = {
 			loggedUser: null,
-			otherUser: null,
+			user: null,
 			planet: null,
 			planetStatus: 0,
 			showHomePage: false,
@@ -20,9 +20,10 @@ class MainContainer extends React.Component {
 
 	componentDidMount(){
 		this.setState({
-			loggedUser: this.props.loggedUser
+			loggedUser: this.props.loggedUser,
+			user: this.props.user
 		})
-		this.findPlanet()
+		this.findPlanet(this.props.user)
 		this.timer = setInterval(() => {
 			this.decreasePlanetHappiness()
 		}, 4000)
@@ -34,8 +35,8 @@ class MainContainer extends React.Component {
   	}
 
 
-	findPlanet = async () => {
-		const url = `http://localhost:9000/api/v1/planet/${this.props.loggedUser._id}`
+	findPlanet = async (user) => {
+		const url = `http://localhost:9000/api/v1/planet/${user._id}`
 		const findPlanet = await fetch(url, {
 			method: 'GET',
 			credentials: 'include',
@@ -48,6 +49,7 @@ class MainContainer extends React.Component {
 			planet: planet,
 			planetStatus: planet.status
 		})
+		console.log(user,'<0000000user in the findPlanet');
 	}
 
 
@@ -87,15 +89,17 @@ class MainContainer extends React.Component {
 	toggleHomePage = () => {
 		this.setState({
 			showHomePage: !this.state.showHomePage,
-			otherUser: null
+			// user: null
 		})
 	}
 
 	goToUserPage = (user) => {
 		this.setState({
-			otherUser: user,
-			showHomePage: !this.state.showHomePage
+			user: user,
+			showHomePage: false
 		})
+		console.log(user,"<askljdaskas jjjj    need to see this ")
+		this.findPlanet(user)
 	}
 
 
@@ -106,14 +110,15 @@ class MainContainer extends React.Component {
   			{ menuItem: 'data category', render: () => <Tab.Pane><DataCategory toggleHomePage={this.toggleHomePage}/></Tab.Pane> },]
 		return(
 			<div>
-			{this.state.showHomePage? null: 
+			{this.state.showHomePage ? null: 
 				<div className='UserProefileGroup'>
 					{this.state.planet ? <UserPlanet 
 						increasePlanetHappiness={this.increasePlanetHappiness} 
 						delete = {this.deletePlanet} 
 						planet = {this.state.planet} 
 						loggedUser = {this.props.loggedUser}
-						otherUser = {this.state.otherUser} 
+						user = {this.state.user} 
+						goToUserPage = {this.goToUserPage}
 						planetStatus={this.state.planetStatus}/>
 						: 
 						<a onClick={this.props.togglePlanetContainer}>
