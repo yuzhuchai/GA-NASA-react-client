@@ -42,11 +42,14 @@ class UserPlanet extends React.Component {
 		console.log(editPlanetBio);
 		const parsed = await editPlanetBio.json()
 		// console.log(parsed,'<-=======edited planet ');
-		this.setState({
-			planet: parsed.data
-		})
+		this.props.goToUserPage(this.props.loggedUser)
 	}
 	
+	handleClick = () => {
+		this.props.goToUserPage(this.props.loggedUser)
+
+	}
+
 
 	handleChange = (e) => {
 		this.setState({
@@ -64,16 +67,16 @@ class UserPlanet extends React.Component {
 				: 
 					<div>
 						<h3>here is {this.props.user.username}'s baby planet</h3>
-						<a onClick={this.props.goToUserPage.bind(null, this.props.loggedUser)}>back to your profile page</a>
+						<a onClick={this.handleClick}>back to your profile page</a>
 					</div>
 				}
 				
 				<Card>
 				{this.state.planet? 
 					<Card.Content>
-						<Card.Header>{this.state.planet.name}</Card.Header>
+						<Card.Header>{this.props.planet.name}</Card.Header>
 						<Card.Meta>Your planet happiness: {this.props.planetStatus}</Card.Meta>
-						<Card.Description>{this.state.planet.bio}</Card.Description>
+						<Card.Description>{this.props.planet.bio}</Card.Description>
 					</Card.Content>
 					:
 					null}

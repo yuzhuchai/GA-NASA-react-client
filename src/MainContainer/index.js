@@ -98,13 +98,13 @@ class MainContainer extends React.Component {
 			user: user,
 			showHomePage: false
 		})
-		console.log(user,"<askljdaskas jjjj    need to see this ")
+		// console.log(user,"<askljdaskas jjjj    need to see this ")
 		this.findPlanet(user)
 	}
 
 
 	render(){
-		console.log(this.state,'<------state in userprofile ');
+		// console.log(this.state,'<------state in userprofile ');
 		const panes = [
 			{ menuItem: 'featured posts', render: () => <Tab.Pane><FeaturedPosts goToUserPage={this.goToUserPage} loggedUser={this.state.loggedUser}/></Tab.Pane> },
   			{ menuItem: 'data category', render: () => <Tab.Pane><DataCategory toggleHomePage={this.toggleHomePage}/></Tab.Pane> },]
