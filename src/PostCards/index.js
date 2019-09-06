@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Image, Button, Form, Modal } from 'semantic-ui-react'
+import { Card, Image, Button, Form, Modal, Comment, Header} from 'semantic-ui-react'
 
 class PostCards  extends React.Component {
 	// this is a function displaying a list of posts it will be used for all the places that need to display posts by passing down an array of posts.
@@ -59,7 +59,13 @@ class PostCards  extends React.Component {
 		const postList = this.props.posts.map((post,i) => {
 			const commentList = post.comments.map(comment => {
 				return (
-					<p key={comment._id}>{comment.content} on {comment.date} by {comment.user.username}</p>
+					<Comment key={comment._id}>
+						<Comment.Content>
+							<Comment.Author as='a'>{comment.user.username}</Comment.Author>
+							<Comment.Metadata>on {comment.date}</Comment.Metadata>
+							<Comment.Text>{comment.content}</Comment.Text>
+						</Comment.Content>
+					</Comment>
 				)
 			})
 			const subStr = post.content.substring(0,50)
@@ -91,13 +97,21 @@ class PostCards  extends React.Component {
 			    				<p>{post.content}</p>
 			    			</Modal.Content>
 			    			<Modal.Description>
-			    				{commentList}
+
+			    				<Comment.Group>
+				    				<Header as='h3' dividing>
+								      Comments
+								    </Header>
+			    					{commentList}
+
+					    			<Form onSubmit={this.createComment.bind(null, post._id)}>
+						         		<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
+						       			<Button>submit</Button>
+						        	</Form>
+						        	<Button onClick={this.handleModal}>LIKE</Button>
+
+			    				</Comment.Group>
 			    			</Modal.Description>
-			    			<Form onSubmit={this.createComment.bind(null, post._id)}>
-				         		<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
-				       			<Button>submit</Button>
-				        	</Form>
-				        	<Button onClick={this.handleModal}>LIKE</Button>
 			    		</Modal>
 				    </Card.Content>
 			    </Card>
