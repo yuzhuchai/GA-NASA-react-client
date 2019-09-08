@@ -80,6 +80,15 @@ class MainContainer extends React.Component {
 		})
 	}
 
+	updatePlanet = (name, bio) => {
+		this.setState({
+			planet:{
+				...this.state.planet, 
+				name: name, 
+				bio: bio
+			}
+		})
+	}
 
 	deletePlanet = async () => {
 		console.log(this.state.planet._id);
@@ -147,9 +156,10 @@ class MainContainer extends React.Component {
 					<a onClick={this.toggleHomePage}> click here to look at some awsome data and post them!</a>
 					<div className='UserProefileGroup'>
 						{this.state.planet ? <UserPlanet 
+							updatePlanet={this.updatePlanet}
 							increasePlanetHappiness={this.increasePlanetHappiness} 
 							delete = {this.deletePlanet} 
-							planet = {this.state.planet} 
+							planet = {this.state.planet}
 							loggedUser = {this.props.loggedUser}
 							user = {this.state.user} 
 							goToUserPage = {this.goToUserPage}
@@ -163,7 +173,7 @@ class MainContainer extends React.Component {
 						goToUserPage={this.goToUserPage}
 						toggleHomePage={this.toggleHomePage} 
 						user={this.state.user} 
-						loggedUser={this.state.loggedUser}
+						loggedUser={this.props.loggedUser}
 						userPosts={this.state.userPosts}/>
 					</div>
 				</div>

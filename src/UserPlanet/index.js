@@ -42,7 +42,7 @@ class UserPlanet extends React.Component {
 		console.log(editPlanetBio);
 		const parsed = await editPlanetBio.json()
 		// console.log(parsed,'<-=======edited planet ');
-		this.props.goToUserPage(this.props.loggedUser)
+		this.props.updatePlanet(this.state.planetName, this.state.planetBio)
 	}
 	
 	handleClick = () => {
