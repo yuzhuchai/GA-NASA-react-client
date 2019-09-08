@@ -22,8 +22,9 @@ class LandingContainer extends React.Component{
   	render(){
 		return(
 			<div>
-				<Apod caption={this.props.caption} date={this.props.date} bio={this.props.bio} />
-				
+				{this.props.video? 
+					<Apod caption={this.props.caption} date={this.props.date} bio={this.props.bio} video={this.props.video} notification={this.props.notification}/>
+				: null}
 		        {this.state.displayLogin ? 
 		        	<Login toggleContainer={this.props.toggleContainer} toggleLoginContainer={this.props.toggleLoginContainer} toggleLogin={this.toggleLogin} /> : 
 		        	<Register toggleLogin={this.toggleLogin} toggleRegisterContainer={this.props.toggleRegisterContainer}/>

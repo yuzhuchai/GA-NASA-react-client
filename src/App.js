@@ -20,7 +20,9 @@ class App extends React.Component {
       displayProfile: false,
       planetStatus: 0,
       planetId: null,
-      user: null
+      user: null,
+      video:'',
+      notification:''
     }
   }
 
@@ -63,13 +65,24 @@ class App extends React.Component {
       })
       const parsdResponse = await response.json()
       // console.log(parsdResponse,"<------landing page apod data");
-
-      this.setState({
-        apodImgUrl: parsdResponse.data.imgUrl,
-        apodCaption: parsdResponse.data.imgCaption,
-        apodParagraph: parsdResponse.data.explnation,
-        date: parsdResponse.data.date
-      }) 
+      if (parsdResponse.data.mediaType ==='video'){
+        this.setState({
+          apodImgUrl: 'https://apod.nasa.gov/apod/image/1705/BeneathJupiter_Juno_960.jpg',
+          apodCaption: parsdResponse.data.imgCaption,
+          apodParagraph: parsdResponse.data.explnation,
+          date: parsdResponse.data.date,
+          video:parsdResponse.data.imgUrl,
+          notification: 'this background image is Jupiter, the following paragraph is the description of NASA image of the day, which it this video.'
+        }) 
+      } else {
+        this.setState({
+          apodImgUrl: parsdResponse.data.imgUrl,
+          apodCaption: parsdResponse.data.imgCaption,
+          apodParagraph: parsdResponse.data.explnation,
+          date: parsdResponse.data.date,
+        }) 
+      }
+      
   }
 
   toggleRegisterContainer = (user) => {
@@ -105,7 +118,7 @@ class App extends React.Component {
   }
 
   render(){
-    // console.log(this.state.planetId);
+    console.log(this.state,'<=====state in app');
     const appStyle = {
         backgroundImage: `url(${this.state.apodImgUrl})`,
       }
@@ -113,7 +126,7 @@ class App extends React.Component {
     return (
       <div style={ appStyle } className="App">
         <Header logout={this.logout}/>
-        {this.state.displayLandingPage? <LandingContainer toggleLoginContainer={this.toggleLogInContainer} toggleRegisterContainer={this.toggleRegisterContainer} caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph}/>: null}
+        {this.state.displayLandingPage? <LandingContainer toggleLoginContainer={this.toggleLogInContainer} toggleRegisterContainer={this.toggleRegisterContainer} caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph} video={this.state.video} notification={this.state.notification}/> : null}
         {this.state.selectPlanet ? <SelectPlanetContainer toggleContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser}/> : null}
         {this.state.displayProfile ? <MainContainer changePlanetStatus={this.changePlanetStatus} user={this.state.user} togglePlanetContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser} /> : null}
       </div>
