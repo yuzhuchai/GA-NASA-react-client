@@ -34,28 +34,32 @@ class PostCards  extends React.Component {
 		// console.log(id,'<----- comment id to edit');
 	}
 
-	createComment = async (postid,e) => {
-		e.preventDefault()
-		console.log(postid,"<-----postid");
-		console.log(this.state.comment);
-		const data = {content: this.state.comment}
-		const url =	`http://localhost:9000/api/v1/comment/${postid}`
-		const createComment = await fetch(url, {
-			method: 'POST',
-			body: JSON.stringify(data),
-			credentials: 'include',
-			headers: {
-		        'Content-Type': 'application/json'
-		    }
-		})
-		const parsed = await createComment.json()
-		// console.log(parsed,'>>>>>>>>> better see some comments');
-		this.setState({
-			comment: '',
-			showmodal: false,
-		})
+	// createComment = async (postid,e) => {
+	// 	e.preventDefault()
+	// 	console.log(postid,"<-----postid");
+	// 	console.log(this.state.comment);
+	// 	const data = {content: this.state.comment}
+	// 	const url =	`http://localhost:9000/api/v1/comment/${postid}`
+	// 	const createComment = await fetch(url, {
+	// 		method: 'POST',
+	// 		body: JSON.stringify(data),
+	// 		credentials: 'include',
+	// 		headers: {
+	// 	        'Content-Type': 'application/json'
+	// 	    }
+	// 	})
+	// 	const parsed = await createComment.json()
+	// 	// console.log(parsed,'>>>>>>>>> better see some comments');
+	// 	this.setState({
+	// 		comment: '',
+	// 		showmodal: false,
+	// 	})
 
-		// need to give this commet back to the state so it can display 
+	// 	// need to give this commet back to the state so it can display 
+	// }
+
+	updateComment = (comment) => {
+		this.state.foundComment.push(comment)
 	}
 
 	findAllComments = async (postId) => {
@@ -156,12 +160,13 @@ class PostCards  extends React.Component {
 				    						deleteComment={this.deleteComment} 
 				    						editComment={this.editComment} 
 				    						loggedUser={this.props.loggedUser}
-				    						foundComment={this.state.foundComment}/>
+				    						foundComment={this.state.foundComment}
+				    						createComment={this.createComment}
+				    						post={this.state.post}
+				    						updateComment={this.updateComment}
+				    						/>
 
-						    			<Form onSubmit={this.createComment.bind(null, this.state.post._id)}>
-							         		<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
-							       			<Button>submit</Button>
-							        	</Form>
+						    			
 							        	
 							        	<div>
 				    						{this.props.loggedUser._id === this.state.post.user._id?
