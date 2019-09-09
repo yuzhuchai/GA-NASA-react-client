@@ -118,7 +118,8 @@ class App extends React.Component {
   }
 
   render(){
-    console.log(this.state,'<=====state in app');
+    console.log(process.env,'<-----process .env');
+    // console.log(this.state,'<=====state in app');
     const appStyle = {
         backgroundImage: `url(${this.state.apodImgUrl})`,
       }

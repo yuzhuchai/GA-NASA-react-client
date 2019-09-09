@@ -91,18 +91,27 @@ class PostCards  extends React.Component {
 	}
 
 	handleLike = async (post) => {
-		const url = `${process.env.REACT_APP_API_URL}/api/v1/post/like/${post._id}`
-		const response = await fetch(url, {
-			method: 'PUT',
-			credentials: 'include',
-		})
+		console.log(post.favoritedBy,'<------posertttttt ');
+		console.log(this.props.loggedUser,'<----------uasdaskljdasdaksljda');
+		const favoritedById = post.favoritedBy.map(user => user._id)
 
-		const parsed = await response.json()
-		console.log(parsed,'<=======parsedResponse after save');
-		this.props.updateUserPosts(parsed.data.editPost, true)
-		this.setState({
-			post: parsed.data.editPost
-		})
+		if (favoritedById.indexOf(this.props.loggedUser._id) === -1){
+			console.log(`they are not the same !!!!!`);
+			const url = `${process.env.REACT_APP_API_URL}/api/v1/post/like/${post._id}`
+			const response = await fetch(url, {
+				method: 'PUT',
+				credentials: 'include',
+			})
+
+			const parsed = await response.json()
+			console.log(parsed,'<=======parsedResponse after save');
+			this.props.updateUserPosts(parsed.data.editPost, true)
+			this.setState({
+				post: parsed.data.editPost
+			})
+		} else {
+			console.log(`already liked the post`);
+		}
 	}
 
 	render(){
