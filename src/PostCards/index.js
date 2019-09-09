@@ -1,5 +1,7 @@
 import React from 'react'
 import EditPost from '../EditPost'
+import CommentList from '../CommentList'
+
 import { Card, Image, Button, Form, Modal, Comment, Header} from 'semantic-ui-react'
 
 class PostCards  extends React.Component {
@@ -112,25 +114,7 @@ class PostCards  extends React.Component {
 
 	console.log(this.props,'<======postcards');
 		const postList = this.props.posts.map((post) => {
-			const commentList = this.state.foundComment.map(comment => {
-				return (
-					<Comment key={comment._id}>
-						<Comment.Content>
-							<Comment.Author as='a'>{comment.user.username}</Comment.Author>
-							<Comment.Metadata>on {comment.date}</Comment.Metadata>
-							<Comment.Text>{comment.content}</Comment.Text>
-							{this.props.loggedUser.username === comment.user.username ? 
-								<Comment.Actions>
-									<Comment.Action onClick={this.deleteComment.bind(null, comment._id)}>delete</Comment.Action>
-									<Comment.Action onClick={this.editComment.bind(null, comment._id)}>edit</Comment.Action>
-								</Comment.Actions>
-							:
-							null 
-							}
-						</Comment.Content>
-					</Comment>
-				)
-			})
+
 			const subStr = post.content.substring(0,50)
 			return(
 				<Card key={post._id}>
@@ -168,7 +152,11 @@ class PostCards  extends React.Component {
 					    				<Header as='h3' dividing>
 									      Comments
 									    </Header>
-				    					{commentList}
+				    					<CommentList 
+				    						deleteComment={this.deleteComment} 
+				    						editComment={this.editComment} 
+				    						loggedUser={this.props.loggedUser}
+				    						foundComment={this.state.foundComment}/>
 
 						    			<Form onSubmit={this.createComment.bind(null, this.state.post._id)}>
 							         		<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
