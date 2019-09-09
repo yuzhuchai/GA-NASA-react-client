@@ -1,4 +1,5 @@
 import React from 'react'
+import EditPost from '../EditPost'
 import { Card, Image, Button, Form, Modal, Comment, Header} from 'semantic-ui-react'
 
 class PostCards  extends React.Component {
@@ -9,7 +10,9 @@ class PostCards  extends React.Component {
 		this.state={
 			comment: '',
 			displayfrom: false,
-			showmodal: false
+			showmodal: false,
+			showEditModal: false,
+			editPost: null
 		}
 	}
 
@@ -51,9 +54,23 @@ class PostCards  extends React.Component {
 		// need to give this commet back to the state so it can display 
 	}
 
+	toggleModal = (post) => {
+		this.setState({
+			showmodal: false,
+			showEditModal: true,
+			editPost: post,
+		})
+	}
+	handleEditModal= () => {
+		this.setState({
+			showmodal: true,
+			showEditModal: false,
+		})
+	}
+
 	handleModal=() => {
 		this.setState({
-			showmodal: !this.state.showmodal
+			showmodal: !this.state.showmodal,
 		})
 	}
 	displayFrom = () => {
@@ -63,7 +80,7 @@ class PostCards  extends React.Component {
 	}
 	render(){
 
-	// console.log(props,'<======postcards');
+	console.log(this.props,'<======postcards');
 		const postList = this.props.posts.map((post,i) => {
 			const commentList = post.comments.map(comment => {
 				return (
@@ -107,6 +124,7 @@ class PostCards  extends React.Component {
 			    	</Card.Content>
 
 			    	<Card.Content extra>
+			    		
 			    		<Modal trigger={<Button onClick={this.handleModal}>SHOW POST</Button>} open={this.state.showmodal} onClose={this.handleModal}>
 			    			<Modal.Content>
 			    				<Image size='medium' src={post.img} floated='left'/>
@@ -124,11 +142,22 @@ class PostCards  extends React.Component {
 						         		<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
 						       			<Button>submit</Button>
 						        	</Form>
-						        	<Button onClick={this.handleModal}>LIKE</Button>
-
+						        	
+						        	<div>
+			    						{this.props.loggedUser.username === post.user.username? 
+			    						<Button onClick={this.toggleModal.bind(null, post)}>EDIT POST</Button> : 
+			    						<Button onClick={this.handleModal}>LIKE</Button>}
+			    					</div>
 			    				</Comment.Group>
 			    			</Modal.Description>
 			    		</Modal>
+
+			    		<Modal open={this.state.showEditModal} onClose={this.handleEditModal}>
+			    			<Modal.Content>
+			    				<EditPost editPost={this.state.editPost}/>
+			    			</Modal.Content>
+			    		</Modal>
+
 				    </Card.Content>
 			    </Card>
 			)
