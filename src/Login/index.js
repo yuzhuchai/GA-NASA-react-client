@@ -46,8 +46,8 @@ class Login extends React.Component {
 	}
 
 	render(){
-		console.log(this.props,'<------ props in the login container');
-		console.log(this.state,"<-----state in login");
+		// console.log(this.props,'<------ props in the login container');
+		// console.log(this.state,"<-----state in login");
 		return(
 			<div className='RegisterLogin'>
 				<h3>Log in!</h3>
