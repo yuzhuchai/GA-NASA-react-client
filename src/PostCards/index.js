@@ -38,30 +38,7 @@ class PostCards  extends React.Component {
 		// console.log(id,'<----- comment id to edit');
 	}
 
-	// createComment = async (postid,e) => {
-	// 	e.preventDefault()
-	// 	console.log(postid,"<-----postid");
-	// 	console.log(this.state.comment);
-	// 	const data = {content: this.state.comment}
-	// 	const url =	`http://localhost:9000/api/v1/comment/${postid}`
-	// 	const createComment = await fetch(url, {
-	// 		method: 'POST',
-	// 		body: JSON.stringify(data),
-	// 		credentials: 'include',
-	// 		headers: {
-	// 	        'Content-Type': 'application/json'
-	// 	    }
-	// 	})
-	// 	const parsed = await createComment.json()
-	// 	// console.log(parsed,'>>>>>>>>> better see some comments');
-	// 	this.setState({
-	// 		comment: '',
-	// 		showmodal: false,
-	// 	})
-
-	// 	// need to give this commet back to the state so it can display 
-	// }
-
+	
 	updateComment = (comment) => {
 		 this.state.foundComment.push(comment)
 	}
@@ -168,6 +145,7 @@ class PostCards  extends React.Component {
 				    						post={this.state.post}
 				    						updateComment={this.updateComment}
 				    						updateDeleteComment={this.updateDeleteComment}
+				    						goToUserPage={this.props.goToUserPage}
 				    						/>
 							        	
 							        	<div>

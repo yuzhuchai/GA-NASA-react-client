@@ -52,19 +52,28 @@ class CommentList extends React.Component {
 		this.props.updateDeleteComment(commentId)
 	}
 
+
 	render(){
 
 		const commentList = this.props.foundComment.map((comment) => {
 				return (
 					<Comment key={comment._id}>
 						<Comment.Content>
-							<a><Comment.Author>{comment.user.username}</Comment.Author></a>
+
+							{this.props.loggedUser.username !== comment.user.username ? 
+
+								<Comment.Author>
+									<a onClick={this.props.goToUserPage.bind(null, comment.user)}>{comment.user.username}</a> 
+								</Comment.Author>
+								:
+							
+								<Comment.Author>you</Comment.Author>
+							}
 							<Comment.Metadata>on {comment.date}</Comment.Metadata>
 							<Comment.Text>{comment.content}</Comment.Text>
 							{this.props.loggedUser.username === comment.user.username ? 
 								<Comment.Actions>
 									<Comment.Action onClick={this.deleteComment.bind(null,comment._id)}>delete</Comment.Action>
-									<Comment.Action onClick={this.props.editComment.bind(null, comment._id)}>edit</Comment.Action>
 								</Comment.Actions>
 							:
 							null 
