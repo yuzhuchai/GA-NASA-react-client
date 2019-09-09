@@ -89,7 +89,7 @@ class MainContainer extends React.Component {
 		})
 	}
 
-	deletePost = async (postID) => {
+	deletePost = async (postID,i) => {
 		console.log(postID,'<------this is the id of the post to be deleted');
 		const url = `http://localhost:9000/api/v1/post/${postID}`
 		const deleteResponse = await fetch(url, {
@@ -97,7 +97,11 @@ class MainContainer extends React.Component {
 			credentials: 'include'
 		})
 		console.log(deleteResponse,'<000--0000 this si the deletet response');
-		
+		const oldPost = this.state.userPosts
+		const newUserPosts = oldPost.filter(post => post._id !== postID)
+		this.setState({
+			userPosts: newUserPosts
+		})
 	}
 
 	updateUserPosts = (returnedPost) => {

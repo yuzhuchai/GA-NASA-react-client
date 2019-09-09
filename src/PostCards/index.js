@@ -78,10 +78,18 @@ class PostCards  extends React.Component {
 			displayfrom: !this.state.displayfrom
 		})
 	}
+
+	deletePostToggle = (postid) => {
+		this.props.deletePost(postid)
+		this.handleModal()
+	}
+
+
 	render(){
 
 	// console.log(this.props,'<======postcards');
-		const postList = this.props.posts.map((post,i) => {
+		const postList = this.props.posts.map((post) => {
+			console.log(post,'<------ok post');
 			const commentList = post.comments.map(comment => {
 				return (
 					<Comment key={comment._id}>
@@ -124,7 +132,6 @@ class PostCards  extends React.Component {
 			    	</Card.Content>
 
 			    	<Card.Content extra>
-			    		
 			    		<Modal trigger={<Button onClick={this.handleModal}>SHOW POST</Button>} open={this.state.showmodal} onClose={this.handleModal}>
 			    			<Modal.Content>
 			    				<Image size='medium' src={post.img} floated='left'/>
@@ -146,7 +153,7 @@ class PostCards  extends React.Component {
 						        	<div>
 			    						{this.props.loggedUser.username === post.user.username?
 			    						<div>
-				    						<Button onClick={this.props.deletePost.bind(null,post._id)}>DELETE POST</Button> 
+				    						<Button onClick={this.deletePostToggle.bind(null,post._id)}>DELETE POST</Button> 
 				    						<Button onClick={this.toggleModal.bind(null, post)}>EDIT POST</Button> 
 			    						</div> : 
 			    						<Button onClick={this.handleModal}>LIKE</Button>}
