@@ -93,6 +93,16 @@ class PostCards  extends React.Component {
 		})
 	}
 
+	handleLike = async (post) => {
+		const url = `http://localhost:9000/api/v1/post/like/${post._id}`
+		const response = await fetch(url, {
+			method: 'PUT',
+			credentials: 'include',
+		})
+
+		const parsed = await response.json()
+		console.log(parsed,'<=======parsedResponse after save');
+	}
 
 	render(){
 	console.log(this.state,'<---------this is what I wannasee');
@@ -155,7 +165,7 @@ class PostCards  extends React.Component {
 					    							_id)}>DELETE POST</Button> 
 					    						<Button onClick={this.toggleModal.bind(null, this.state.post)}>EDIT POST</Button> 
 				    						</div> : 
-				    						<Button onClick={this.closeModal}>LIKE</Button>}
+				    						<Button onClick={this.handleLike.bind(null, this.state.post)}>LIKE</Button>}
 				    					</div>
 				    				</Comment.Group>
 				    			</Modal.Description>

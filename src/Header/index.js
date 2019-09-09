@@ -11,7 +11,7 @@ class Header extends React.Component{
 	}
 
 	render(){
-		const header = "{WAKUSEI ATSUME}"
+		const header = "{HOSHI ATSUME}"
 
 		return(
 
