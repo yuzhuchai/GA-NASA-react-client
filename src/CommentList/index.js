@@ -36,6 +36,7 @@ class CommentList extends React.Component {
 			comment: '',
 			// showmodal: false,
 		})
+		console.log(parsed,'<000000create the commetns');
 	}
 
 
@@ -54,7 +55,7 @@ class CommentList extends React.Component {
 
 
 	render(){
-
+		console.log(this.props,'<------i wanna se the comments');
 		const commentList = this.props.foundComment.map((comment) => {
 				return (
 					<Comment key={comment._id}>
@@ -87,9 +88,9 @@ class CommentList extends React.Component {
 			<div>
 				<div>
 					{this.props.foundComment?
-					<div> 
-						{commentList}
-					</div>
+						<div> 
+							{commentList}
+						</div>
 					: null
 					}
 				</div>

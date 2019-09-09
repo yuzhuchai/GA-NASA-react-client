@@ -35,10 +35,6 @@ class PostCards  extends React.Component {
 		})
 	}
 
-	editComment = async (id) => {
-		// console.log(id,'<----- comment id to edit');
-	}
-
 	
 	updateComment = (comment) => {
 		 this.state.foundComment.push(comment)
@@ -73,9 +69,7 @@ class PostCards  extends React.Component {
 			post: post,
 			showEditModal: false 
 		})
-		if(this.showmodal){
-			this.findAllComments(post._id)
-		}
+		this.findAllComments(post._id)
 	}
 
 	displayFrom = () => {
@@ -86,13 +80,13 @@ class PostCards  extends React.Component {
 
 	deletePostToggle = (postid) => {
 		this.props.deletePost(postid)
-		this.handleModal()
+		this.closeModal()
 	}
 
 	closeModal= () => {
 		this.setState({
 			showmodal: false,
-			showEditModal: false 
+			showEditModal: false
 		})
 	}
 
@@ -105,19 +99,16 @@ class PostCards  extends React.Component {
 
 		const parsed = await response.json()
 		console.log(parsed,'<=======parsedResponse after save');
-		this.props.updateUserPosts(parsed.data.editPost)
+		this.props.updateUserPosts(parsed.data.editPost, true)
 		this.setState({
 			post: parsed.data.editPost
 		})
 	}
 
 	render(){
-	console.log(this.state,'<---------this is what I wannasee');
-
-	console.log(this.props,'<======postcards');
+		console.log(this.props,'<======postcards');
 		const postList = this.props.posts.map((post) => {
-
-			const subStr = post.content.substring(0,50)
+				const subStr = post.content.substring(0,50)
 			return(
 				<Card key={post._id}>
 		    		<Card.Content>
@@ -159,6 +150,8 @@ class PostCards  extends React.Component {
 			    						</div> : 
 			    						<Button onClick={this.handleLike.bind(null, this.state.post)}><Icon name='like' />{this.state.post.favoritedBy.length} Likes</Button>}
 			    					</div>
+
+
 				    				<Comment.Group>
 					    				<Header as='h3' dividing>
 									      Comments

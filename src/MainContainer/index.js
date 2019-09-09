@@ -15,14 +15,14 @@ class MainContainer extends React.Component {
 			planetStatus: 0,
 			showHomePage: false,
 			allPosts:[],
-			userPost:[]
+			userPost:[],
 		}
 	}
 
 	componentDidMount(){
 		this.setState({
 			loggedUser: this.props.loggedUser,
-			user: this.props.user
+			user: this.props.user,
 		})
 		this.findAllPosts()
 		this.findPlanetAndPosts(this.props.user)
@@ -52,6 +52,7 @@ class MainContainer extends React.Component {
 
 	}
 
+
 	findPlanetAndPosts = async (user) => {
 		const url = `http://localhost:9000/api/v1/planet/${user._id}`
 		const findPlanet = await fetch(url, {
@@ -71,9 +72,9 @@ class MainContainer extends React.Component {
 			credentials: 'include'
 		})
 		const parsedPosts = await findPost.json();
-		// console.log(parsedPosts,'<-------parsedPosts   ahskljaskdajs;dalsj;adajs;ajd');
-		// console.log(userPost,'<======userpost');	
+
 		this.setState({
+			likedPosts: user.favoritedPostsId,
 			planet: planet,
 			planetStatus: planet.status,
 			userPosts: [...parsedPosts.data]
@@ -108,7 +109,7 @@ class MainContainer extends React.Component {
 		})
 	}
 
-	updateUserPosts = (returnedPost) => {
+	updateUserPosts = (returnedPost, liked) => {
 		const oldPost = this.state.userPosts
 		const newUserPosts = oldPost.map(post => {
 			console.log(post,'<------- post');
@@ -126,13 +127,19 @@ class MainContainer extends React.Component {
 				return post
 			}
 		})
+		
 		console.log(returnedPost,'<------here is the returned Post');
 		console.log(newUserPosts,'<------ this is the new userposts');
 		this.setState({
 			userPosts: newUserPosts,
-			allPosts: newPosts
+			allPosts: newPosts,
 		})
+
+		if(liked){
+			this.state.likedPosts.push(returnedPost)
+		}
 	}
+
 
 	deletePlanet = async () => {
 		console.log(this.state.planet._id);
@@ -232,6 +239,7 @@ class MainContainer extends React.Component {
 							</a>
 						}
 						<UserPosts 
+						likedPosts={this.state.likedPosts}
 						deletePost={this.deletePost}
 						updateUserPosts={this.updateUserPosts}
 						goToUserPage={this.goToUserPage}
