@@ -81,7 +81,7 @@ class UserPlanet extends React.Component {
 					</div>
 				}
 				
-				<Card>
+				<Card centered>
 				{this.state.planet? 
 					<Card.Content>
 						<Card.Header>{this.props.planet.name}</Card.Header>

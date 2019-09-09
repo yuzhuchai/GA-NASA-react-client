@@ -198,7 +198,7 @@ class PostCards  extends React.Component {
 		return(
 			<div className='PostCards'>
 				{this.props.loggedUser ? 
-					<Card.Group>
+					<Card.Group centered>
 						{postList}
 					</Card.Group>
 				:

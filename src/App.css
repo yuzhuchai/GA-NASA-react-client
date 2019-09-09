@@ -14,16 +14,26 @@
   color: white;
 }
 
-.UserPlanet, .UserPosts, .Apod, .RegisterLogin{
+.UserPlanet, .UserPosts{
+  vertical-align:top;
+  display: inline-block;
+  color: white;
+  width: 40vw;
+  margin: 20px;
+  margin-top: 50px;
+
+}
+.Apod, .RegisterLogin{
   vertical-align:middle;
   display: inline-block;
-/*  height: 60vh;
-*/  width: 40vw;
+/*  height: 60vh;*/
+  width: 40vw;
   margin: 20px;
   margin-top: 50px;
   background-color: rgba(100,100,100,0.8);
   color: white;
   padding: 20px;
+  border-radius: 30px;
 }
 
 .SearchPlanet{
@@ -34,6 +44,8 @@
     padding: 20px;
     display: inline-block;
     vertical-align: middle;
+    border-radius: 30px;
+
 }
 
 .Card{
@@ -50,11 +62,19 @@
   width: 80vw;
   vertical-align:middle;
   margin: 50px auto;
-  background-color: rgba(100,100,100,0.8);
+  /*background-color: rgba(100,100,100,0.8);*/
   padding: 50px;
 }
 
+a{
+  font-size: 18px;
+  color: hotpink;
+  text-decoration: wavy underline;
+}
 
+.App-header-header{
+  font-size: 50px;
+}
 
 @keyframes App-logo-spin {
   from {

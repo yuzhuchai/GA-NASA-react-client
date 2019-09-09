@@ -299,7 +299,7 @@ class MainContainer extends React.Component {
 					<div>
 						<a onClick={this.goToUserPage.bind(null, this.props.loggedUser)}>back to your profile page</a> 
 						<div className='HomePagePost'>
-							<Tab panes={panes}/>
+							<Tab menu={{pointing: true , secondary: true, color: 'pink'}} panes={panes}/>
 						</div>
 					</div>
 					 : null

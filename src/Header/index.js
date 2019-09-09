@@ -15,10 +15,10 @@ class Header extends React.Component{
 
 		return(
 
-			<div>
+			<div className='App-header'>
 	
 				<a onClick={this.props.logout}>logout</a>	
-				<h1 className='App-header'> {header}</h1>
+				<h1 className='App-header-header'> {header}</h1>
 			
 			</div>
 		)

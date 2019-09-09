@@ -16,7 +16,7 @@ class UserPosts extends React.Component {
 
 		// console.log(this.props,'<========props in the user possts container');
 			const panes = [
-			{menuItem: 'Posts', render: () =>
+			{menuItem:'Posts', render: () =>
 					<Tab.Pane>
 						<PostCards
 							increasePlanetHappiness={this.props.increasePlanetHappiness}
@@ -48,12 +48,12 @@ class UserPosts extends React.Component {
 			{this.props.userPosts && this.props.likedPosts? 
 				<div>
 					{this.props.user === this.props.loggedUser? 
-						<h1> here are your posts. </h1>
+						<h3> here are your posts. </h3>
 					:
-						<h1> here are {this.props.user.username}'s posts.</h1>
+						<h3> here are {this.props.user.username}'s posts.</h3>
 					}
 				
-					<Tab panes={panes} />
+					<Tab menu={{ pointing: true , secondary: true, color: 'pink'}} panes={panes} />
 					
 				</div>
 			: null}
