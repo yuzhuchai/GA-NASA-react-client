@@ -38,6 +38,19 @@ class CommentList extends React.Component {
 		})
 	}
 
+
+	deleteComment = async (commentId) => {
+		const url = `http://localhost:9000/api/v1/comment/${commentId}`
+		console.log(url);
+		const deleteResponse = await fetch(url,{
+			method: 'DELETE',
+			credentials: 'include'
+		})
+
+		const parsed = await deleteResponse.json();
+		console.log(parsed);
+	}
+
 	render(){
 
 		const commentList = this.props.foundComment.map(comment => {
@@ -49,7 +62,7 @@ class CommentList extends React.Component {
 							<Comment.Text>{comment.content}</Comment.Text>
 							{this.props.loggedUser.username === comment.user.username ? 
 								<Comment.Actions>
-									<Comment.Action onClick={this.props.deleteComment.bind(null, comment._id)}>delete</Comment.Action>
+									<Comment.Action onClick={this.deleteComment.bind(null,comment._id)}>delete</Comment.Action>
 									<Comment.Action onClick={this.props.editComment.bind(null, comment._id)}>edit</Comment.Action>
 								</Comment.Actions>
 							:

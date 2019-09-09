@@ -27,7 +27,7 @@ class PostCards  extends React.Component {
 	}
 
 	deleteComment = async (id) => {
-		// console.log(id,'<-----comment id to delete');
+		console.log(id,'<-----comment id to delete');
 	}
 
 	editComment = async (id) => {
@@ -165,8 +165,6 @@ class PostCards  extends React.Component {
 				    						post={this.state.post}
 				    						updateComment={this.updateComment}
 				    						/>
-
-						    			
 							        	
 							        	<div>
 				    						{this.props.loggedUser._id === this.state.post.user._id?
