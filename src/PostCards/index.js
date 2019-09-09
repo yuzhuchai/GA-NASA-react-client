@@ -61,14 +61,7 @@ class PostCards  extends React.Component {
 			showEditModal: true,
 			editPost: post,
 		})
-		console.log(post._id,'<-----should be differnet');
-	}
-
-	handleEditModal= () => {
-		this.setState({
-			showmodal: true,
-			showEditModal: false,
-		})
+		// console.log(post._id,'<-----should be differnet');
 	}
 
 	handleModal=(post) => {
@@ -77,7 +70,6 @@ class PostCards  extends React.Component {
 			post: post,
 			showEditModal: false 
 		})
-		console.log(post,'<---------this is what I wannasee');
 	}
 	displayFrom = () => {
 		this.setState({
@@ -90,12 +82,19 @@ class PostCards  extends React.Component {
 		this.handleModal()
 	}
 
+	closeModal= () => {
+		this.setState({
+			showmodal: false,
+			showEditModal: false 
+		})
+	}
+
 
 	render(){
+	console.log(this.state.post,'<---------this is what I wannasee');
 
 	console.log(this.props,'<======postcards');
 		const postList = this.props.posts.map((post) => {
-			console.log(post,'<------ok post');
 			const commentList = post.comments.map(comment => {
 				return (
 					<Comment key={comment._id}>
@@ -141,7 +140,7 @@ class PostCards  extends React.Component {
 			    		<Button onClick={this.handleModal.bind(null,post)}>SHOW POST</Button>
 			    		{this.state.post? 
 			    		<div>
-				    		<Modal open={this.state.showmodal} onClose={this.handleModal}>
+				    		<Modal open={this.state.showmodal} onClose={this.closeModal}>
 				    			<Modal.Content>
 				    				<Image size='medium' src={this.state.post.img} floated='left'/>
 				    				<p>{this.state.post.content}</p>
@@ -160,22 +159,22 @@ class PostCards  extends React.Component {
 							        	</Form>
 							        	
 							        	<div>
-				    						{this.props.loggedUser.username === post.user.username?
+				    						{this.props.loggedUser._id === this.state.post.user._id?
 				    						<div>
 					    						<Button onClick={this.deletePostToggle.bind(null, this.state.post.
 					    							_id)}>DELETE POST</Button> 
 					    						<Button onClick={this.toggleModal.bind(null, this.state.post)}>EDIT POST</Button> 
 				    						</div> : 
-				    						<Button onClick={this.handleModal}>LIKE</Button>}
+				    						<Button onClick={this.closeModal}>LIKE</Button>}
 				    					</div>
 				    				</Comment.Group>
 				    			</Modal.Description>
 				    		</Modal>
 				    		</div> : null}
 
-			    		<Modal open={this.state.showEditModal} onClose={this.handleEditModal}>
+			    		<Modal open={this.state.showEditModal} onClose={this.closeModal}>
 			    			<Modal.Content>
-			    				<EditPost editPost={this.state.editPost} updateUserPosts={this.props.updateUserPosts} handleEditModal={this.handleModal}/>
+			    				<EditPost editPost={this.state.editPost} updateUserPosts={this.props.updateUserPosts} handleEditModal={this.closeModal}/>
 			    			</Modal.Content>
 			    		</Modal>
 
