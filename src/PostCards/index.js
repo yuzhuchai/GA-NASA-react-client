@@ -108,6 +108,7 @@ class PostCards  extends React.Component {
 	render(){
 		console.log(this.props,'<======postcards');
 		const postList = this.props.posts.map((post) => {
+				console.log(post,'<----- this should be a userOBj ooops  post');
 				const subStr = post.content.substring(0,50)
 			return(
 				<Card key={post._id}>

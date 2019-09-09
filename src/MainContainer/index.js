@@ -53,6 +53,7 @@ class MainContainer extends React.Component {
 	}
 
 
+
 	findPlanetAndPosts = async (user) => {
 		const url = `http://localhost:9000/api/v1/planet/${user._id}`
 		const findPlanet = await fetch(url, {
@@ -72,6 +73,8 @@ class MainContainer extends React.Component {
 			credentials: 'include'
 		})
 		const parsedPosts = await findPost.json();
+		// console.log(user.favoritedPostsId,'<---------ooops');
+
 
 		this.setState({
 			likedPosts: user.favoritedPostsId,
