@@ -23,11 +23,11 @@ class PostCards  extends React.Component {
 	}
 
 	deleteComment = async (id) => {
-		console.log(id,'<-----comment id to delete');
+		// console.log(id,'<-----comment id to delete');
 	}
 
 	editComment = async (id) => {
-		console.log(id,'<----- comment id to edit');
+		// console.log(id,'<----- comment id to edit');
 	}
 
 	createComment = async (postid,e) => {
@@ -45,7 +45,7 @@ class PostCards  extends React.Component {
 		    }
 		})
 		const parsed = await createComment.json()
-		console.log(parsed,'>>>>>>>>> better see some comments');
+		// console.log(parsed,'>>>>>>>>> better see some comments');
 		this.setState({
 			comment: '',
 			showmodal: false
@@ -80,7 +80,7 @@ class PostCards  extends React.Component {
 	}
 	render(){
 
-	console.log(this.props,'<======postcards');
+	// console.log(this.props,'<======postcards');
 		const postList = this.props.posts.map((post,i) => {
 			const commentList = post.comments.map(comment => {
 				return (
@@ -154,7 +154,7 @@ class PostCards  extends React.Component {
 
 			    		<Modal open={this.state.showEditModal} onClose={this.handleEditModal}>
 			    			<Modal.Content>
-			    				<EditPost editPost={this.state.editPost}/>
+			    				<EditPost editPost={this.state.editPost} updateUserPosts={this.props.updateUserPosts}/>
 			    			</Modal.Content>
 			    		</Modal>
 

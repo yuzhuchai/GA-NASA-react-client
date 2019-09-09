@@ -28,8 +28,8 @@ class EditPost extends React.Component{
 		// this function will call the backend api and update the post, at the same time, lift the state up to update the post in the front end 
 		e.preventDefault()
 		const data = {content: this.state.post.content}
-		console.log(data, '<------this is the data to update');
-		console.log(this.state.post._id,'<-------this si the post id');
+		// console.log(data, '<------this is the data to update');
+		// console.log(this.state.post._id,'<-------this si the post id');
 		const url = `http://localhost:9000/api/v1/post/${this.state.post._id}`
 		const response = await fetch(url, {
 			method: 'PUT',
@@ -40,7 +40,8 @@ class EditPost extends React.Component{
 		        }
 		})
 		const parsed = await response.json()
-		console.log(parsed, '<------this is the new post data ');
+		// console.log(parsed, '<------this is the new post data');
+		this.props.updateUserPosts(this.state.post)
 	}
 
 	render(){

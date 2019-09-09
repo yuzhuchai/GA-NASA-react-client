@@ -15,7 +15,6 @@ class MainContainer extends React.Component {
 			planetStatus: 0,
 			showHomePage: false,
 			allPosts:[],
-			userPost:[]
 		}
 	}
 
@@ -28,7 +27,7 @@ class MainContainer extends React.Component {
 		this.findPlanetAndPosts(this.props.user)
 		this.timer = setInterval(() => {
 			this.decreasePlanetHappiness()
-		}, 4000)
+		}, 20000)
 
 	}
 
@@ -90,6 +89,21 @@ class MainContainer extends React.Component {
 		})
 	}
 
+	updateUserPosts = (returnedPost) => {
+		const oldPost = this.state.userPosts
+		const newUserPosts = oldPost.map(post => {
+			console.log(post,'<------- post');
+			if(post._id === returnedPost._id){
+				return returnedPost
+			}
+		})
+		console.log(returnedPost,'<------here is the returned Post');
+		console.log(newUserPosts,'<------ this is the new userposts');
+		this.setState({
+			userPosts: newUserPosts
+		})
+	}
+
 	deletePlanet = async () => {
 		console.log(this.state.planet._id);
 		const url = `http://localhost:9000/api/v1/planet/${this.state.planet._id}`
@@ -141,7 +155,7 @@ class MainContainer extends React.Component {
 
 
 	render(){
-		console.log(this.state,'<------state in userprofile ');
+		// console.log(this.state,'<------state in userprofile ');
 		const panes = [
 			{ menuItem: 'featured posts', render: () => <Tab.Pane>{this.state.allPosts.length? <PostCards loggedUser={this.props.loggedUser} goToUserPage={this.goToUserPage} posts={this.state.allPosts}/> : null }</Tab.Pane> },
   			{ menuItem: 'data category', render: () => <Tab.Pane><DataCategory toggleHomePage={this.toggleHomePage}/></Tab.Pane> },]
@@ -170,6 +184,7 @@ class MainContainer extends React.Component {
 							</a>
 						}
 						<UserPosts 
+						updateUserPosts={this.updateUserPosts}
 						goToUserPage={this.goToUserPage}
 						toggleHomePage={this.toggleHomePage} 
 						user={this.state.user} 
