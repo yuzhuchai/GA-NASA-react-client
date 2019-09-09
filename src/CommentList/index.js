@@ -49,11 +49,12 @@ class CommentList extends React.Component {
 
 		const parsed = await deleteResponse.json();
 		console.log(parsed);
+		this.props.updateDeleteComment(commentId)
 	}
 
 	render(){
 
-		const commentList = this.props.foundComment.map(comment => {
+		const commentList = this.props.foundComment.map((comment) => {
 				return (
 					<Comment key={comment._id}>
 						<Comment.Content>

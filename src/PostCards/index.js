@@ -26,8 +26,12 @@ class PostCards  extends React.Component {
 		})
 	}
 
-	deleteComment = async (id) => {
-		console.log(id,'<-----comment id to delete');
+	updateDeleteComment = (commentId) => {
+		const oldComment = this.state.foundComment
+		const newComment = oldComment.filter(comment => commentId !== comment._id)		
+		this.setState({
+			foundComment: newComment
+		})
 	}
 
 	editComment = async (id) => {
@@ -59,7 +63,7 @@ class PostCards  extends React.Component {
 	// }
 
 	updateComment = (comment) => {
-		this.state.foundComment.push(comment)
+		 this.state.foundComment.push(comment)
 	}
 
 	findAllComments = async (postId) => {
@@ -157,13 +161,13 @@ class PostCards  extends React.Component {
 									      Comments
 									    </Header>
 				    					<CommentList 
-				    						deleteComment={this.deleteComment} 
 				    						editComment={this.editComment} 
 				    						loggedUser={this.props.loggedUser}
 				    						foundComment={this.state.foundComment}
 				    						createComment={this.createComment}
 				    						post={this.state.post}
 				    						updateComment={this.updateComment}
+				    						updateDeleteComment={this.updateDeleteComment}
 				    						/>
 							        	
 							        	<div>
