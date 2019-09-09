@@ -53,6 +53,7 @@ class SelectPosts extends React.Component {
 		const parsed = await createdPostReaponse.json()
 		console.log(parsed,'<-----createdpostresponse');
 		this.props.increasePlanetHappiness()
+		this.props.handlePostOpen()
 	}
 
 	render(){

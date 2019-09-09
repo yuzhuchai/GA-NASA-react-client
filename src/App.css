@@ -47,9 +47,11 @@
 }
 
 .HomePagePost{
-  width: 60vw;
+  width: 80vw;
   vertical-align:middle;
   margin: 50px auto;
+  background-color: rgba(100,100,100,0.8);
+  padding: 50px;
 }
 
 

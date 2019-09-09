@@ -5,6 +5,7 @@ import DataCategory from '../DataCategory'
 import PostCards from '../PostCards'
 import { Tab, Dimmer, Segment } from 'semantic-ui-react'
 import HappinessPortal from '../HappinessPortal'
+import CreatePostPortal from '../CreatePostPortal'
 
 class MainContainer extends React.Component {
 	constructor(){
@@ -18,7 +19,8 @@ class MainContainer extends React.Component {
 			allPosts:[],
 			userPost:[],
 			open: false,
-			dimactive: false 
+			dimactive: false,
+			postOpen: false
 		}
 	}
 
@@ -196,6 +198,19 @@ class MainContainer extends React.Component {
 		})
 	}
 
+	handlePostOpen = () => {
+		 this.setState({
+		 	postOpen: true 
+		 })
+	}
+
+
+	handlePostClose= () => {
+		this.setState({
+			postOpen: false 
+		})
+	}
+
 
 	toggleHomePage = () => {
 		this.setState({
@@ -234,7 +249,10 @@ class MainContainer extends React.Component {
 				</Tab.Pane> },
   			{ menuItem: 'data category', render: () => 
   				<Tab.Pane>
-  					<DataCategory increasePlanetHappiness={this.increasePlanetHappiness} toggleHomePage={this.toggleHomePage}/>
+  					<DataCategory 
+  						handlePostOpen={this.handlePostOpen} 
+  						increasePlanetHappiness={this.increasePlanetHappiness}
+  						toggleHomePage={this.toggleHomePage}/>
   				</Tab.Pane> 
   			},
   		]
@@ -278,13 +296,17 @@ class MainContainer extends React.Component {
 					</div>
 				}
 				{this.state.showHomePage? 
-					<div className='HomePagePost'>
-					<a onClick={this.goToUserPage.bind(null, this.props.loggedUser)}>back to your profile page</a> 
-						<Tab panes={panes}/>
-					</div> : null
+					<div>
+						<a onClick={this.goToUserPage.bind(null, this.props.loggedUser)}>back to your profile page</a> 
+						<div className='HomePagePost'>
+							<Tab panes={panes}/>
+						</div>
+					</div>
+					 : null
 				}
 			</Dimmer.Dimmable>
 			<HappinessPortal open={this.state.open} handleClose={this.handleClose}/>
+			<CreatePostPortal open={this.state.postOpen} handleClose={this.handlePostClose}/>
 			</div>
 		)
 	}
