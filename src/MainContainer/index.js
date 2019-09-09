@@ -49,9 +49,7 @@ class MainContainer extends React.Component {
 		this.setState({
 			allPosts: parsed.data
 		})
-
 	}
-
 
 
 	findPlanetAndPosts = async (user) => {
