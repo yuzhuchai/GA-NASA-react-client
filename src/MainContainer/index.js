@@ -4,6 +4,7 @@ import UserPosts from '../UserPosts'
 import DataCategory from '../DataCategory'
 import PostCards from '../PostCards'
 import { Tab } from 'semantic-ui-react'
+import HappinessPortal from '../HappinessPortal'
 
 class MainContainer extends React.Component {
 	constructor(){
@@ -16,6 +17,7 @@ class MainContainer extends React.Component {
 			showHomePage: false,
 			allPosts:[],
 			userPost:[],
+			open: false 
 		}
 	}
 
@@ -174,6 +176,21 @@ class MainContainer extends React.Component {
 			planetStatus: (this.state.planetStatus+5)
 		})
 		this.props.changePlanetStatus(this.state.planetStatus+5,this.state.planet._id)
+
+		this.handleOpen()
+	}
+
+
+	handleOpen = () => {
+			this.setState({
+				open: true 
+			})
+	}	
+
+	handleClose = () => {
+		this.setState({
+			open: false 
+		})
 	}
 
 
@@ -192,6 +209,7 @@ class MainContainer extends React.Component {
 		// console.log(user,"<askljdaskas jjjj    need to see this ")
 		this.findPlanetAndPosts(user)
 	}
+
 
 
 	render(){
@@ -261,6 +279,8 @@ class MainContainer extends React.Component {
 					<Tab panes={panes}/>
 				</div> : null
 			}
+
+			<HappinessPortal open={this.state.open} handleClose={this.handleClose}/>
 			</div>
 		)
 	}
