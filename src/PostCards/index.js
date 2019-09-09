@@ -13,7 +13,8 @@ class PostCards  extends React.Component {
 			showmodal: false,
 			showEditModal: false,
 			editPost: null,
-			post: null
+			post: null,
+			foundComment:[]
 		}
 	}
 
@@ -55,6 +56,20 @@ class PostCards  extends React.Component {
 		// need to give this commet back to the state so it can display 
 	}
 
+	findAllComments = async (postId) => {
+		const url = `http://localhost:9000/api/v1/comment/post/${postId}`
+		const response = await fetch(url,{
+			method: 'GET',
+			credentials: 'include'
+		})
+		const parsedResponse = await response.json()
+		console.log(parsedResponse,'<------yes, need to see this ');
+		this.setState({
+			foundComment: [...parsedResponse.data]
+		})
+	}
+
+
 	toggleModal = (post) => {
 		this.setState({
 			showmodal: false,
@@ -70,7 +85,9 @@ class PostCards  extends React.Component {
 			post: post,
 			showEditModal: false 
 		})
+		this.findAllComments(post._id)
 	}
+
 	displayFrom = () => {
 		this.setState({
 			displayfrom: !this.state.displayfrom
@@ -91,11 +108,11 @@ class PostCards  extends React.Component {
 
 
 	render(){
-	console.log(this.state.post,'<---------this is what I wannasee');
+	console.log(this.state,'<---------this is what I wannasee');
 
 	console.log(this.props,'<======postcards');
 		const postList = this.props.posts.map((post) => {
-			const commentList = post.comments.map(comment => {
+			const commentList = this.state.foundComment.map(comment => {
 				return (
 					<Comment key={comment._id}>
 						<Comment.Content>
@@ -153,7 +170,7 @@ class PostCards  extends React.Component {
 									    </Header>
 				    					{commentList}
 
-						    			<Form onSubmit={this.createComment.bind(null, post._id)}>
+						    			<Form onSubmit={this.createComment.bind(null, this.state.post._id)}>
 							         		<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
 							       			<Button>submit</Button>
 							        	</Form>

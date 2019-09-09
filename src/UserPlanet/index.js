@@ -8,7 +8,8 @@ class UserPlanet extends React.Component {
 			// planetStatus: 0,
 			planetName:'',
 			planetBio:'',
-			planet: null
+			planet: null,
+			showmodal: false
 		}
 	}
 
@@ -43,6 +44,10 @@ class UserPlanet extends React.Component {
 		const parsed = await editPlanetBio.json()
 		// console.log(parsed,'<-=======edited planet ');
 		this.props.updatePlanet(this.state.planetName, this.state.planetBio)
+		this.setState({
+			showmodal: !this.state.showmodal
+		})
+
 	}
 	
 	handleClick = () => {
@@ -50,6 +55,11 @@ class UserPlanet extends React.Component {
 
 	}
 
+	handleModal= () => {
+		this.setState({
+			showmodal: !this.state.showmodal
+		})
+	}
 
 	handleChange = (e) => {
 		this.setState({
@@ -82,7 +92,7 @@ class UserPlanet extends React.Component {
 					null}
 					{this.props.user === this.props.loggedUser ? 
 						<Card.Content extra>
-							<Modal trigger={<Button>Edit</Button>}>
+							<Modal open={this.state.showmodal} trigger={<Button onClick={this.handleModal}>Edit</Button>} onClose={this.handleModal}>
 								<Modal.Header> Edit your planet profile</Modal.Header>
 								<Modal.Content>
 									<Form onSubmit={this.handleSubmit}>
