@@ -139,6 +139,8 @@ class MainContainer extends React.Component {
 		if(liked){
 			this.state.likedPosts.push(returnedPost)
 		}
+			this.increasePlanetHappiness()
+
 	}
 
 
@@ -162,9 +164,9 @@ class MainContainer extends React.Component {
 
 	decreasePlanetHappiness = () => {
 		this.setState({
-			planetStatus: (this.state.planetStatus-1)
+			planetStatus: (this.state.planetStatus-5)
 		})
-		this.props.changePlanetStatus(this.state.planetStatus-1, this.state.planet._id)
+		this.props.changePlanetStatus(this.state.planetStatus-5, this.state.planet._id)
 	}
 
 	increasePlanetHappiness = () => {
@@ -197,7 +199,8 @@ class MainContainer extends React.Component {
 		const panes = [
 			{ menuItem: 'featured posts', render: () => 
 				<Tab.Pane>{this.state.allPosts.length? 
-					<PostCards 
+					<PostCards
+						increasePlanetHappiness={this.increasePlanetHappiness} 
 						loggedUser={this.props.loggedUser} 
 						goToUserPage={this.goToUserPage} 
 						posts={this.state.allPosts}
@@ -210,7 +213,7 @@ class MainContainer extends React.Component {
 				</Tab.Pane> },
   			{ menuItem: 'data category', render: () => 
   				<Tab.Pane>
-  					<DataCategory toggleHomePage={this.toggleHomePage}/>
+  					<DataCategory increasePlanetHappiness={this.increasePlanetHappiness} toggleHomePage={this.toggleHomePage}/>
   				</Tab.Pane> 
   			},
   		]
@@ -240,6 +243,7 @@ class MainContainer extends React.Component {
 							</a>
 						}
 						<UserPosts 
+						increasePlanetHappiness={this.increasePlanetHappiness}
 						likedPosts={this.state.likedPosts}
 						deletePost={this.deletePost}
 						updateUserPosts={this.updateUserPosts}

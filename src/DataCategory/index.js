@@ -27,7 +27,7 @@ class DataCategory extends React.Component{
 
 
 	render(){
-		// console.log(this.state);
+		console.log(this.props,'<-----look for planet happiness');
 		return(
 			<div className='DataCategory'>
 			{this.state.displayCat? 
@@ -77,7 +77,7 @@ class DataCategory extends React.Component{
 				<div>
 					<a onClick={this.handleClick}>back to DataCategory</a>
 					<h1>should be some posts of {this.state.cat}</h1>
-					<SelectPosts cat={this.state.cat}/>
+					<SelectPosts increasePlanetHappiness={this.props.increasePlanetHappiness} cat={this.state.cat}/>
 				</div>
 				:null
 			}

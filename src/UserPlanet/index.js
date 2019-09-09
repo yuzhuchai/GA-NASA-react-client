@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button, Modal, Form, Header } from 'semantic-ui-react'
+import { Card, Button, Modal, Form, Header, TextArea } from 'semantic-ui-react'
 
 class UserPlanet extends React.Component {
 	constructor(){
@@ -102,7 +102,7 @@ class UserPlanet extends React.Component {
 										</Form.Field>
 										<Form.Field>
 											<label> change the bio: </label>
-											<input type='text' value={this.state.planetBio} name='planetBio' onChange={this.handleChange}/>
+											<TextArea type='text' value={this.state.planetBio} name='planetBio' onChange={this.handleChange}/>
 										</Form.Field>
 										<Button>submit</Button>
 									</Form> 

@@ -52,10 +52,11 @@ class SelectPosts extends React.Component {
 		})
 		const parsed = await createdPostReaponse.json()
 		console.log(parsed,'<-----createdpostresponse');
+		this.props.increasePlanetHappiness()
 	}
 
 	render(){
-		// console.log(this.state,'<-------state in select posts');
+		console.log(this.props,'<-------state in select posts');
 		return(
 			<div>
 				<Card fluid>

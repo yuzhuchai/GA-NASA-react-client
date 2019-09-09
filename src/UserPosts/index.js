@@ -18,7 +18,8 @@ class UserPosts extends React.Component {
 			const panes = [
 			{menuItem: 'Posts', render: () =>
 					<Tab.Pane>
-						<PostCards 
+						<PostCards
+							increasePlanetHappiness={this.props.increasePlanetHappiness}
 							deletePost={this.props.deletePost} 
 							updateUserPosts={this.props.updateUserPosts} 
 							posts={this.props.userPosts} 
@@ -31,6 +32,7 @@ class UserPosts extends React.Component {
 			{menuItem: 'Liked', render:() =>
 					<Tab.Pane>
 						<PostCards
+							increasePlanetHappiness={this.props.increasePlanetHappiness}
 							deletePost={this.props.deletePost} 
 							updateUserPosts={this.props.updateUserPosts} 
 							posts={this.props.likedPosts} 

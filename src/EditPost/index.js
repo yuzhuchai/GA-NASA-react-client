@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Button} from 'semantic-ui-react'
+import {Form, Button, TextArea} from 'semantic-ui-react'
 
 class EditPost extends React.Component{
 	constructor(){
@@ -51,7 +51,7 @@ class EditPost extends React.Component{
 			<div>
 				{this.state.post? 
 					<Form onSubmit={this.handleSubmit}>
-						<input type='text' value={this.state.post.content} onChange={this.handleChange} />
+						<TextArea type='text' value={this.state.post.content} onChange={this.handleChange} />
 						<Button> submit </Button>
 					</Form>
 				: null}

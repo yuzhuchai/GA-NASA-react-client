@@ -38,6 +38,7 @@ class PostCards  extends React.Component {
 	
 	updateComment = (comment) => {
 		 this.state.foundComment.push(comment)
+		 this.props.increasePlanetHappiness()
 	}
 
 	findAllComments = async (postId) => {
@@ -112,6 +113,8 @@ class PostCards  extends React.Component {
 		} else {
 			console.log(`already liked the post`);
 		}
+
+		this.props.increasePlanetHappiness()
 	}
 
 	render(){
