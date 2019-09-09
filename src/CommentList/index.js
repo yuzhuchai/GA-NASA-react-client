@@ -21,7 +21,7 @@ class CommentList extends React.Component {
 		e.preventDefault()
 		// this.props.createComment.bind(null, this.props.post._id)
 		const data = {content: this.state.comment}
-		const url =	`http://localhost:9000/api/v1/comment/${this.props.post._id}`
+		const url =	`${process.env.REACT_APP_API_URL}/api/v1/comment/${this.props.post._id}`
 		const createComment = await fetch(url, {
 			method: 'POST',
 			body: JSON.stringify(data),
@@ -41,7 +41,7 @@ class CommentList extends React.Component {
 
 
 	deleteComment = async (commentId) => {
-		const url = `http://localhost:9000/api/v1/comment/${commentId}`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/comment/${commentId}`
 		console.log(url);
 		const deleteResponse = await fetch(url,{
 			method: 'DELETE',

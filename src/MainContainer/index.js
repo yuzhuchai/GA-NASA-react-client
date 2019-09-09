@@ -39,7 +39,7 @@ class MainContainer extends React.Component {
 
   	findAllPosts = async () => {
 	// this function will find all the posts and select couple of them randomly. set state and then pass them down as props to the postCards
-		const url = `http://localhost:9000/api/v1/post`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/post`
 		const findAllPosts = await fetch(url,{
 			method: 'GET',
 			credentials: 'include'
@@ -53,7 +53,7 @@ class MainContainer extends React.Component {
 
 
 	findPlanetAndPosts = async (user) => {
-		const url = `http://localhost:9000/api/v1/planet/${user._id}`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/planet/${user._id}`
 		const findPlanet = await fetch(url, {
 			method: 'GET',
 			credentials: 'include',
@@ -65,7 +65,7 @@ class MainContainer extends React.Component {
 		
 		// console.log(user,'<0000000user in the findPlanet');
 
-		const postUrl = `http://localhost:9000/api/v1/post/user/${user._id}`
+		const postUrl = `${process.env.REACT_APP_API_URL}/api/v1/post/user/${user._id}`
 		const findPost = await fetch(postUrl,{
 			method: 'GET',
 			credentials: 'include'
@@ -94,7 +94,7 @@ class MainContainer extends React.Component {
 
 	deletePost = async (postID,i) => {
 		console.log(postID,'<------this is the id of the post to be deleted');
-		const url = `http://localhost:9000/api/v1/post/${postID}`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/post/${postID}`
 		const deleteResponse = await fetch(url, {
 			method: 'DELETE',
 			credentials: 'include'
@@ -144,7 +144,7 @@ class MainContainer extends React.Component {
 
 	deletePlanet = async () => {
 		console.log(this.state.planet._id);
-		const url = `http://localhost:9000/api/v1/planet/${this.state.planet._id}`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/planet/${this.state.planet._id}`
 		const deletePlanet = await fetch(url, {
 			method: 'DELETE',
 			credentials: 'include'

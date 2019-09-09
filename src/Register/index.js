@@ -12,7 +12,7 @@ class Register extends React.Component {
 
 	handleSubmit = async (e) => {
 		e.preventDefault()
-		const url = `http://localhost:9000/api/v1/user/register`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/user/register`
 		const registerResponse = await fetch(url,{
 			method: 'POST',
 			body: JSON.stringify(this.state),

@@ -30,7 +30,7 @@ class UserPlanet extends React.Component {
 			name: this.state.planetName,
 			bio: this.state.planetBio
 		}
-		const url = `http://localhost:9000/api/v1/planet/${this.state.planet._id}`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/planet/${this.state.planet._id}`
 		const editPlanetBio = await fetch (url, {
 			method: 'PUT',
 			credentials: 'include',

@@ -15,7 +15,7 @@ class SelectPosts extends React.Component {
 	}
 
 	samplePost = async () => {
-		const url = `http://localhost:9000/api/v1/nasadata/${this.props.cat}`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/nasadata/${this.props.cat}`
 		console.log(url);
 		const response = await fetch(url, {
 			method: 'GET',
@@ -36,7 +36,7 @@ class SelectPosts extends React.Component {
 
 
 	savePostToUser = async () => {
-		const url = `http://localhost:9000/api/v1/post`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/post`
 		const data = {
 			content: this.state.content,
 			imgUrl: this.state.imgUrl,

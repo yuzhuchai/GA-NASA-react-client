@@ -30,7 +30,7 @@ class EditPost extends React.Component{
 		const data = {content: this.state.post.content}
 		// console.log(data, '<------this is the data to update');
 		// console.log(this.state.post._id,'<-------this si the post id');
-		const url = `http://localhost:9000/api/v1/post/${this.state.post._id}`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/post/${this.state.post._id}`
 		const response = await fetch(url, {
 			method: 'PUT',
 			credentials: 'include',

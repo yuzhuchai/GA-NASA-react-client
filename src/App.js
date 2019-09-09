@@ -33,7 +33,7 @@ class App extends React.Component {
 
 
   logout = async () => {
-    const logoutResponse = await fetch(`http://localhost:9000/api/v1/user/logout`,{
+    const logoutResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/user/logout`,{
       credentials: 'include'
     })
     // console.log(logoutResponse,'<-=----logout response ');
@@ -45,7 +45,7 @@ class App extends React.Component {
     })
 
     // so right here when i log out i have to save the planet status. 
-    const updatePlanetStatus = await fetch(`http://localhost:9000/api/v1/planet/status/${this.state.planetId}`,{
+    const updatePlanetStatus = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/planet/status/${this.state.planetId}`,{
           method: 'PUT',
           credentials: 'include',
           body: JSON.stringify({status:this.state.planetStatus}),
@@ -59,7 +59,7 @@ class App extends React.Component {
 
 
   getApodData = async () => {
-      const response = await fetch('http://localhost:9000/api/v1/nasadata/load/apod', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/nasadata/load/apod`, {
           method: 'GET',
           credentials: 'include',
       })

@@ -18,7 +18,7 @@ class SelectPlanetContainer extends React.Component {
 
 
 	getRandomPlanet = async () => {
-		const url = `http://localhost:9000/api/v1/nasadata/planet`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/nasadata/planet`
 		const getRandomPlanet = await fetch(url, {
 			method: 'GET',
 			credientials: 'include'
@@ -38,7 +38,7 @@ class SelectPlanetContainer extends React.Component {
 			name: planet,
 			bio: bio
 		}
-		const url = `http://localhost:9000/api/v1/planet/adopt`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/planet/adopt`
 		const createdPlanet = await fetch(url, {
 			method: 'POST',
 			body: JSON.stringify(data),

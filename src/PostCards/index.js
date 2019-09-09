@@ -41,7 +41,7 @@ class PostCards  extends React.Component {
 	}
 
 	findAllComments = async (postId) => {
-		const url = `http://localhost:9000/api/v1/comment/post/${postId}`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/comment/post/${postId}`
 		const response = await fetch(url,{
 			method: 'GET',
 			credentials: 'include'
@@ -91,7 +91,7 @@ class PostCards  extends React.Component {
 	}
 
 	handleLike = async (post) => {
-		const url = `http://localhost:9000/api/v1/post/like/${post._id}`
+		const url = `${process.env.REACT_APP_API_URL}/api/v1/post/like/${post._id}`
 		const response = await fetch(url, {
 			method: 'PUT',
 			credentials: 'include',
