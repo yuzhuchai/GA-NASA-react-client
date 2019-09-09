@@ -144,8 +144,11 @@ class PostCards  extends React.Component {
 						        	</Form>
 						        	
 						        	<div>
-			    						{this.props.loggedUser.username === post.user.username? 
-			    						<Button onClick={this.toggleModal.bind(null, post)}>EDIT POST</Button> : 
+			    						{this.props.loggedUser.username === post.user.username?
+			    						<div>
+				    						<Button onClick={this.props.deletePost.bind(null,post._id)}>DELETE POST</Button> 
+				    						<Button onClick={this.toggleModal.bind(null, post)}>EDIT POST</Button> 
+			    						</div> : 
 			    						<Button onClick={this.handleModal}>LIKE</Button>}
 			    					</div>
 			    				</Comment.Group>
@@ -154,7 +157,7 @@ class PostCards  extends React.Component {
 
 			    		<Modal open={this.state.showEditModal} onClose={this.handleEditModal}>
 			    			<Modal.Content>
-			    				<EditPost editPost={this.state.editPost} updateUserPosts={this.props.updateUserPosts}/>
+			    				<EditPost editPost={this.state.editPost} updateUserPosts={this.props.updateUserPosts} handleEditModal={this.handleEditModal}/>
 			    			</Modal.Content>
 			    		</Modal>
 

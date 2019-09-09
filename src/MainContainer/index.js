@@ -89,12 +89,25 @@ class MainContainer extends React.Component {
 		})
 	}
 
+	deletePost = async (postID) => {
+		console.log(postID,'<------this is the id of the post to be deleted');
+		const url = `http://localhost:9000/api/v1/post/${postID}`
+		const deleteResponse = await fetch(url, {
+			method: 'DELETE',
+			credentials: 'include'
+		})
+		console.log(deleteResponse,'<000--0000 this si the deletet response');
+		
+	}
+
 	updateUserPosts = (returnedPost) => {
 		const oldPost = this.state.userPosts
 		const newUserPosts = oldPost.map(post => {
 			console.log(post,'<------- post');
 			if(post._id === returnedPost._id){
 				return returnedPost
+			} else {
+				return post
 			}
 		})
 		console.log(returnedPost,'<------here is the returned Post');
@@ -184,6 +197,7 @@ class MainContainer extends React.Component {
 							</a>
 						}
 						<UserPosts 
+						deletePost={this.deletePost}
 						updateUserPosts={this.updateUserPosts}
 						goToUserPage={this.goToUserPage}
 						toggleHomePage={this.toggleHomePage} 

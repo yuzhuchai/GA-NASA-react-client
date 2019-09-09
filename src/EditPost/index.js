@@ -42,6 +42,7 @@ class EditPost extends React.Component{
 		const parsed = await response.json()
 		// console.log(parsed, '<------this is the new post data');
 		this.props.updateUserPosts(this.state.post)
+		this.props.handleEditModal()
 	}
 
 	render(){

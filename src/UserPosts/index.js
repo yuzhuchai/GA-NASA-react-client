@@ -23,7 +23,13 @@ class UserPosts extends React.Component {
 					:
 						<h1> here are {this.props.user.username}'s posts.</h1>
 					}
-					<PostCards updateUserPosts={this.props.updateUserPosts} posts={this.props.userPosts} user={this.props.user} loggedUser={this.props.loggedUser} goToUserPage={this.props.goToUserPage}/> 
+					<PostCards 
+						deletePost={this.props.deletePost} 
+						updateUserPosts={this.props.updateUserPosts} 
+						posts={this.props.userPosts} 
+						user={this.props.user} 
+						loggedUser={this.props.loggedUser} 
+						goToUserPage={this.props.goToUserPage}/> 
 				</div>
 			: null}
 			</div>
