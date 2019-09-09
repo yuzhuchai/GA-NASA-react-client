@@ -3,7 +3,7 @@ import UserPlanet from '../UserPlanet'
 import UserPosts from '../UserPosts'
 import DataCategory from '../DataCategory'
 import PostCards from '../PostCards'
-import { Tab } from 'semantic-ui-react'
+import { Tab, Dimmer, Segment } from 'semantic-ui-react'
 import HappinessPortal from '../HappinessPortal'
 
 class MainContainer extends React.Component {
@@ -17,7 +17,8 @@ class MainContainer extends React.Component {
 			showHomePage: false,
 			allPosts:[],
 			userPost:[],
-			open: false 
+			open: false,
+			dimactive: false 
 		}
 	}
 
@@ -183,13 +184,15 @@ class MainContainer extends React.Component {
 
 	handleOpen = () => {
 			this.setState({
-				open: true 
+				open: true,
+				dimactive: true 
 			})
 	}	
 
 	handleClose = () => {
 		this.setState({
-			open: false 
+			open: false,
+			dimactive: false 
 		})
 	}
 
@@ -235,51 +238,52 @@ class MainContainer extends React.Component {
   				</Tab.Pane> 
   			},
   		]
-
+  		const active = this.state.dimactive
 		return(
 			<div>
-			{this.state.user !== this.props.loggedUser? 
-				<a onClick={this.goToUserPage.bind(null, this.props.loggedUser)}>back to your profile page</a> 
-			: null
-			}
-			{this.state.showHomePage ? null: 
-				<div>
-					<a onClick={this.toggleHomePage}> click here to look at some awsome data and post them!</a>
-					<div className='UserProefileGroup'>
-						{this.state.planet ? <UserPlanet 
-							updatePlanet={this.updatePlanet}
-							increasePlanetHappiness={this.increasePlanetHappiness} 
-							delete = {this.deletePlanet} 
-							planet = {this.state.planet}
-							loggedUser = {this.props.loggedUser}
-							user = {this.state.user} 
-							goToUserPage = {this.goToUserPage}
-							planetStatus={this.state.planetStatus}/>
-							: 
-							<a onClick={this.props.togglePlanetContainer}>
-							you have no planet, adopt one!
-							</a>
-						}
-						<UserPosts 
-						increasePlanetHappiness={this.increasePlanetHappiness}
-						likedPosts={this.state.likedPosts}
-						deletePost={this.deletePost}
-						updateUserPosts={this.updateUserPosts}
-						goToUserPage={this.goToUserPage}
-						toggleHomePage={this.toggleHomePage} 
-						user={this.state.user} 
-						loggedUser={this.props.loggedUser}
-						userPosts={this.state.userPosts}/>
+			<Dimmer.Dimmable blurring dimmed={active}>
+				{this.state.user !== this.props.loggedUser? 
+					<a onClick={this.goToUserPage.bind(null, this.props.loggedUser)}>back to your profile page</a> 
+				: null
+				}
+				{this.state.showHomePage ? null: 
+					<div>
+						<a onClick={this.toggleHomePage}> click here to look at some awsome data and post them!</a>
+						<div className='UserProefileGroup'>
+							{this.state.planet ? <UserPlanet 
+								updatePlanet={this.updatePlanet}
+								increasePlanetHappiness={this.increasePlanetHappiness} 
+								delete = {this.deletePlanet} 
+								planet = {this.state.planet}
+								loggedUser = {this.props.loggedUser}
+								user = {this.state.user} 
+								goToUserPage = {this.goToUserPage}
+								planetStatus={this.state.planetStatus}/>
+								: 
+								<a onClick={this.props.togglePlanetContainer}>
+								you have no planet, adopt one!
+								</a>
+							}
+							<UserPosts 
+							increasePlanetHappiness={this.increasePlanetHappiness}
+							likedPosts={this.state.likedPosts}
+							deletePost={this.deletePost}
+							updateUserPosts={this.updateUserPosts}
+							goToUserPage={this.goToUserPage}
+							toggleHomePage={this.toggleHomePage} 
+							user={this.state.user} 
+							loggedUser={this.props.loggedUser}
+							userPosts={this.state.userPosts}/>
+						</div>
 					</div>
-				</div>
-			}
-			{this.state.showHomePage? 
-				<div className='HomePagePost'>
-				<a onClick={this.goToUserPage.bind(null, this.props.loggedUser)}>back to your profile page</a> 
-					<Tab panes={panes}/>
-				</div> : null
-			}
-
+				}
+				{this.state.showHomePage? 
+					<div className='HomePagePost'>
+					<a onClick={this.goToUserPage.bind(null, this.props.loggedUser)}>back to your profile page</a> 
+						<Tab panes={panes}/>
+					</div> : null
+				}
+			</Dimmer.Dimmable>
 			<HappinessPortal open={this.state.open} handleClose={this.handleClose}/>
 			</div>
 		)
