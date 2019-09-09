@@ -2,7 +2,7 @@ import React from 'react'
 import EditPost from '../EditPost'
 import CommentList from '../CommentList'
 
-import { Card, Image, Button, Form, Modal, Comment, Header} from 'semantic-ui-react'
+import { Card, Image, Button, Form, Modal, Comment, Header, Feed, Icon } from 'semantic-ui-react'
 
 class PostCards  extends React.Component {
 	// this is a function displaying a list of posts it will be used for all the places that need to display posts by passing down an array of posts.
@@ -16,7 +16,8 @@ class PostCards  extends React.Component {
 			showEditModal: false,
 			editPost: null,
 			post: null,
-			foundComment:[]
+			foundComment:[],
+			numOfLikes:0
 		}
 	}
 
@@ -72,7 +73,9 @@ class PostCards  extends React.Component {
 			post: post,
 			showEditModal: false 
 		})
-		this.findAllComments(post._id)
+		if(this.showmodal){
+			this.findAllComments(post._id)
+		}
 	}
 
 	displayFrom = () => {
@@ -102,6 +105,10 @@ class PostCards  extends React.Component {
 
 		const parsed = await response.json()
 		console.log(parsed,'<=======parsedResponse after save');
+		this.props.updateUserPosts(parsed.data.editPost)
+		this.setState({
+			post: parsed.data.editPost
+		})
 	}
 
 	render(){
@@ -142,7 +149,16 @@ class PostCards  extends React.Component {
 				    				<p>{this.state.post.content}</p>
 				    			</Modal.Content>
 				    			<Modal.Description>
-
+				    				<div>
+			    						{this.props.loggedUser._id === this.state.post.user._id?
+			    						<div>
+				    						<Button onClick={this.deletePostToggle.bind(null, this.state.post.
+				    							_id)}>DELETE POST</Button> 
+				    						<Button onClick={this.toggleModal.bind(null, this.state.post)}>EDIT POST</Button>
+				    						<Feed.Like><Icon name='like'/>{this.state.post.favoritedBy.length} Likes</Feed.Like>
+			    						</div> : 
+			    						<Button onClick={this.handleLike.bind(null, this.state.post)}><Icon name='like' />{this.state.post.favoritedBy.length} Likes</Button>}
+			    					</div>
 				    				<Comment.Group>
 					    				<Header as='h3' dividing>
 									      Comments
@@ -157,16 +173,6 @@ class PostCards  extends React.Component {
 				    						updateDeleteComment={this.updateDeleteComment}
 				    						goToUserPage={this.props.goToUserPage}
 				    						/>
-							        	
-							        	<div>
-				    						{this.props.loggedUser._id === this.state.post.user._id?
-				    						<div>
-					    						<Button onClick={this.deletePostToggle.bind(null, this.state.post.
-					    							_id)}>DELETE POST</Button> 
-					    						<Button onClick={this.toggleModal.bind(null, this.state.post)}>EDIT POST</Button> 
-				    						</div> : 
-				    						<Button onClick={this.handleLike.bind(null, this.state.post)}>LIKE</Button>}
-				    					</div>
 				    				</Comment.Group>
 				    			</Modal.Description>
 				    		</Modal>

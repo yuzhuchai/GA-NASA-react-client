@@ -100,8 +100,11 @@ class MainContainer extends React.Component {
 		console.log(deleteResponse,'<000--0000 this si the deletet response');
 		const oldPost = this.state.userPosts
 		const newUserPosts = oldPost.filter(post => post._id !== postID)
+		const allPosts = this.state.allPosts
+		const newPosts = allPosts.filter(post => post._id !== postID)
 		this.setState({
-			userPosts: newUserPosts
+			userPosts: newUserPosts,
+			allPosts: newPosts
 		})
 	}
 
@@ -115,10 +118,19 @@ class MainContainer extends React.Component {
 				return post
 			}
 		})
+		const allPost = this.state.allPosts
+		const newPosts = allPost.map(post => {
+			if(post._id === returnedPost._id){
+				return returnedPost
+			} else {
+				return post
+			}
+		})
 		console.log(returnedPost,'<------here is the returned Post');
 		console.log(newUserPosts,'<------ this is the new userposts');
 		this.setState({
-			userPosts: newUserPosts
+			userPosts: newUserPosts,
+			allPosts: newPosts
 		})
 	}
 
@@ -151,7 +163,7 @@ class MainContainer extends React.Component {
 		this.setState({
 			planetStatus: (this.state.planetStatus+5)
 		})
-		this.props.changePlanetStatus(this.state.planetStatus+5)
+		this.props.changePlanetStatus(this.state.planetStatus+5,this.state.planet._id)
 	}
 
 
@@ -175,8 +187,26 @@ class MainContainer extends React.Component {
 	render(){
 		// console.log(this.state,'<------state in userprofile ');
 		const panes = [
-			{ menuItem: 'featured posts', render: () => <Tab.Pane>{this.state.allPosts.length? <PostCards loggedUser={this.props.loggedUser} goToUserPage={this.goToUserPage} posts={this.state.allPosts}/> : null }</Tab.Pane> },
-  			{ menuItem: 'data category', render: () => <Tab.Pane><DataCategory toggleHomePage={this.toggleHomePage}/></Tab.Pane> },]
+			{ menuItem: 'featured posts', render: () => 
+				<Tab.Pane>{this.state.allPosts.length? 
+					<PostCards 
+						loggedUser={this.props.loggedUser} 
+						goToUserPage={this.goToUserPage} 
+						posts={this.state.allPosts}
+						deletePost={this.deletePost}
+						updateUserPosts={this.updateUserPosts}
+						/> 
+					: 
+						null 
+					}
+				</Tab.Pane> },
+  			{ menuItem: 'data category', render: () => 
+  				<Tab.Pane>
+  					<DataCategory toggleHomePage={this.toggleHomePage}/>
+  				</Tab.Pane> 
+  			},
+  		]
+
 		return(
 			<div>
 			{this.state.user !== this.props.loggedUser? 
