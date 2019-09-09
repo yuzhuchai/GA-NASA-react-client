@@ -12,7 +12,8 @@ class PostCards  extends React.Component {
 			displayfrom: false,
 			showmodal: false,
 			showEditModal: false,
-			editPost: null
+			editPost: null,
+			post: null
 		}
 	}
 
@@ -48,7 +49,7 @@ class PostCards  extends React.Component {
 		// console.log(parsed,'>>>>>>>>> better see some comments');
 		this.setState({
 			comment: '',
-			showmodal: false
+			showmodal: false,
 		})
 
 		// need to give this commet back to the state so it can display 
@@ -60,7 +61,9 @@ class PostCards  extends React.Component {
 			showEditModal: true,
 			editPost: post,
 		})
+		console.log(post._id,'<-----should be differnet');
 	}
+
 	handleEditModal= () => {
 		this.setState({
 			showmodal: true,
@@ -68,10 +71,13 @@ class PostCards  extends React.Component {
 		})
 	}
 
-	handleModal=() => {
+	handleModal=(post) => {
 		this.setState({
 			showmodal: !this.state.showmodal,
+			post: post,
+			showEditModal: false 
 		})
+		console.log(post,'<---------this is what I wannasee');
 	}
 	displayFrom = () => {
 		this.setState({
@@ -87,7 +93,7 @@ class PostCards  extends React.Component {
 
 	render(){
 
-	// console.log(this.props,'<======postcards');
+	console.log(this.props,'<======postcards');
 		const postList = this.props.posts.map((post) => {
 			console.log(post,'<------ok post');
 			const commentList = post.comments.map(comment => {
@@ -132,39 +138,44 @@ class PostCards  extends React.Component {
 			    	</Card.Content>
 
 			    	<Card.Content extra>
-			    		<Modal trigger={<Button onClick={this.handleModal}>SHOW POST</Button>} open={this.state.showmodal} onClose={this.handleModal}>
-			    			<Modal.Content>
-			    				<Image size='medium' src={post.img} floated='left'/>
-			    				<p>{post.content}</p>
-			    			</Modal.Content>
-			    			<Modal.Description>
+			    		<Button onClick={this.handleModal.bind(null,post)}>SHOW POST</Button>
+			    		{this.state.post? 
+			    		<div>
+				    		<Modal open={this.state.showmodal} onClose={this.handleModal}>
+				    			<Modal.Content>
+				    				<Image size='medium' src={this.state.post.img} floated='left'/>
+				    				<p>{this.state.post.content}</p>
+				    			</Modal.Content>
+				    			<Modal.Description>
 
-			    				<Comment.Group>
-				    				<Header as='h3' dividing>
-								      Comments
-								    </Header>
-			    					{commentList}
+				    				<Comment.Group>
+					    				<Header as='h3' dividing>
+									      Comments
+									    </Header>
+				    					{commentList}
 
-					    			<Form onSubmit={this.createComment.bind(null, post._id)}>
-						         		<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
-						       			<Button>submit</Button>
-						        	</Form>
-						        	
-						        	<div>
-			    						{this.props.loggedUser.username === post.user.username?
-			    						<div>
-				    						<Button onClick={this.deletePostToggle.bind(null,post._id)}>DELETE POST</Button> 
-				    						<Button onClick={this.toggleModal.bind(null, post)}>EDIT POST</Button> 
-			    						</div> : 
-			    						<Button onClick={this.handleModal}>LIKE</Button>}
-			    					</div>
-			    				</Comment.Group>
-			    			</Modal.Description>
-			    		</Modal>
+						    			<Form onSubmit={this.createComment.bind(null, post._id)}>
+							         		<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
+							       			<Button>submit</Button>
+							        	</Form>
+							        	
+							        	<div>
+				    						{this.props.loggedUser.username === post.user.username?
+				    						<div>
+					    						<Button onClick={this.deletePostToggle.bind(null, this.state.post.
+					    							_id)}>DELETE POST</Button> 
+					    						<Button onClick={this.toggleModal.bind(null, this.state.post)}>EDIT POST</Button> 
+				    						</div> : 
+				    						<Button onClick={this.handleModal}>LIKE</Button>}
+				    					</div>
+				    				</Comment.Group>
+				    			</Modal.Description>
+				    		</Modal>
+				    		</div> : null}
 
 			    		<Modal open={this.state.showEditModal} onClose={this.handleEditModal}>
 			    			<Modal.Content>
-			    				<EditPost editPost={this.state.editPost} updateUserPosts={this.props.updateUserPosts} handleEditModal={this.handleEditModal}/>
+			    				<EditPost editPost={this.state.editPost} updateUserPosts={this.props.updateUserPosts} handleEditModal={this.handleModal}/>
 			    			</Modal.Content>
 			    		</Modal>
 

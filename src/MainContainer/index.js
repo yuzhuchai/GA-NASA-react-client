@@ -15,6 +15,7 @@ class MainContainer extends React.Component {
 			planetStatus: 0,
 			showHomePage: false,
 			allPosts:[],
+			userPost:[]
 		}
 	}
 
