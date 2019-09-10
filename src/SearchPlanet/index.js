@@ -39,12 +39,14 @@ class SearchPlanet extends React.Component {
 		if (parsed.success){
 			this.setState({
 				foundPlanet : [parsed.data],
-				message: ''
+				message: '',
+				color: 'red' 
 			})	
 		} else {
 			this.setState({
 				message: parsed.message,
-				foundPlanet: []
+				foundPlanet: [],
+				
 			})
 		}
 	}
@@ -74,7 +76,7 @@ class SearchPlanet extends React.Component {
 				</div>
 
 				<div className='Card'> 
-					{this.state.foundPlanet? <PlanetCards adoptPlanet={this.props.adoptPlanet}randomPlanet={this.state.foundPlanet}/> : null}
+					{this.state.foundPlanet? <PlanetCards color={this.state.color} adoptPlanet={this.props.adoptPlanet}randomPlanet={this.state.foundPlanet}/> : null}
 				</div>
 			</div>
 		)

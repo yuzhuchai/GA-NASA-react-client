@@ -7,7 +7,7 @@ class PlanetCards extends React.Component{
 		super()
 		this.state={
 			bio:'',
-			open: false
+			open: false,
 		}
 	}
 
@@ -27,11 +27,12 @@ class PlanetCards extends React.Component{
 
 	render(){
 		const planetCards = this.props.randomPlanet.map((planet, i) => {
-			const sub = planet.bio.substring(0,20)
+			const sub = planet.bio.substring(0,40)
 			// console.log(planet.bio);
 			// console.log(sub);
+			console.log(this.props,'<-----props');
 			return(
-				<Card key={i} >
+				<Card key={i} color={this.props.color}>
 					<Card.Content>
 						<Card.Header>{planet.name}</Card.Header>
 						<Card.Description>
