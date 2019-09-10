@@ -123,7 +123,7 @@ class PostCards  extends React.Component {
 				console.log(post,'<----- this should be a userOBj ooops  post');
 				const subStr = post.content.substring(0,50)
 			return(
-				<Card key={post._id}>
+				<Card key={post._id} style={{width:'100%'}}>
 		    		<Card.Content>
 				        <Image
 				          floated='right'
@@ -197,8 +197,9 @@ class PostCards  extends React.Component {
 
 		return(
 			<div className='PostCards'>
+
 				{this.props.loggedUser ? 
-					<Card.Group centered>
+					<Card.Group style={{backgroundColor:'rgba(0,0,0,0)', margin:0}}centered>
 						{postList}
 					</Card.Group>
 				:

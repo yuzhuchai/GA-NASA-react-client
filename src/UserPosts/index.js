@@ -17,7 +17,7 @@ class UserPosts extends React.Component {
 		// console.log(this.props,'<========props in the user possts container');
 			const panes = [
 			{menuItem:'Posts', render: () =>
-					<Tab.Pane>
+					<Tab.Pane style={{border:'none', backgroundColor:'rgba(0,0,0,0)'}}>
 						<PostCards
 							increasePlanetHappiness={this.props.increasePlanetHappiness}
 							deletePost={this.props.deletePost} 
@@ -30,7 +30,7 @@ class UserPosts extends React.Component {
 					</Tab.Pane>
 			},
 			{menuItem: 'Liked', render:() =>
-					<Tab.Pane>
+					<Tab.Pane style={{border:'none', backgroundColor:'rgba(0,0,0,0)'}}>
 						<PostCards
 							increasePlanetHappiness={this.props.increasePlanetHappiness}
 							deletePost={this.props.deletePost} 

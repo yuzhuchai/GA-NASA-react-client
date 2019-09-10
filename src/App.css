@@ -3,7 +3,8 @@
   min-height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .App-header {
@@ -45,7 +46,10 @@
     display: inline-block;
     vertical-align: middle;
     border-radius: 30px;
+}
 
+.PostCards{
+  margin: 0;
 }
 
 .Card{
@@ -59,10 +63,10 @@
 }
 
 .HomePagePost{
-  width: 80vw;
+  width: 100;
   vertical-align:middle;
   margin: 50px auto;
-  /*background-color: rgba(100,100,100,0.8);*/
+  background-color: rgba(100,100,100,0);
   padding: 50px;
 }
 
@@ -77,11 +81,26 @@ a{
   font-size: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (max-width: 640px){
+  .Apod, .RegisterLogin{
+    display:block;
+    width: 90vw;
+    margin: 20px;
+    margin-top: 50px;
+    background-color: rgba(100,100,100,0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 30px;
   }
-  to {
-    transform: rotate(360deg);
+
+
+  .UserPlanet, .UserPosts{
+    display: block;
+    color: white;
+    width: 90vw;
+    margin: 20px;
+    margin-top: 50px;
   }
+
+
 }

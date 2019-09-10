@@ -122,6 +122,7 @@ class App extends React.Component {
     // console.log(this.state,'<=====state in app');
     const appStyle = {
         backgroundImage: `url(${this.state.apodImgUrl})`,
+        backgroundPosition: 'center'
       }
     // console.log(this.state,"<--------state in app");
     return (

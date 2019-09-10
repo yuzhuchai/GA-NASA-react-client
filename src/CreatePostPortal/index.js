@@ -20,11 +20,10 @@ class CreatePostPortal extends React.Component {
 				// onOpen={this.handleOpen}
 				onClose={this.handleClose}
 			>
-			<Segment inverted color='teal' style={{left:'30%', position:'fixed', top: '30%',zIndex: 1000}}>
-				<h3> you just created a post</h3>
-			</Segment>
+				<Segment inverted color='teal' style={{left:'5%', position:'fixed', top: '20%',zIndex: 1000}}>
+					<h3> you just created a post</h3>
+				</Segment>
 			</TransitionablePortal>
-
 		)
 
 	}

@@ -13,6 +13,13 @@ class HappinessPortal extends React.Component {
 	}
 
 	render(){
+		const style = {
+			left:'5%', 
+			position:'fixed', 
+			top: '40%',
+			zIndex: 1000
+		}
+
 		const open = this.props.open
 		return(
 			<TransitionablePortal 
@@ -20,7 +27,7 @@ class HappinessPortal extends React.Component {
 				// onOpen={this.handleOpen}
 				onClose={this.handleClose}
 			>
-			<Segment inverted color='teal' style={{left:'30%', position:'fixed', top: '50%',zIndex: 1000}}>
+			<Segment color='teal' inverted style={style}>
 				<h3> you just increased your baby planet's happiness</h3>
 			</Segment>
 			</TransitionablePortal>
@@ -29,5 +36,4 @@ class HappinessPortal extends React.Component {
 
 	}
 }
-
 export default HappinessPortal
