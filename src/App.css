@@ -63,11 +63,10 @@
 }
 
 .HomePagePost{
-  width: 100;
+  width: 70%;
   vertical-align:middle;
-  margin: 50px 20px;
+  margin: 50px auto;
   background-color: rgba(100,100,100,0);
-  /*padding: 50px;*/
 }
 
 a{
@@ -106,5 +105,8 @@ a{
     margin-top: 50px;
   }
 
+  .HomePagePost{
+    width: 80%;
+  }
 
 }

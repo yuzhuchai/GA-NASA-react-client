@@ -123,7 +123,7 @@ class PostCards  extends React.Component {
 				console.log(post,'<----- this should be a userOBj ooops  post');
 				const subStr = post.content.substring(0,50)
 			return(
-				<Card key={post._id} style={{width:'100%'}}>
+				<Card key={post._id} style={{width:'100%', margin:'10px auto'}}>
 		    		<Card.Content>
 				        <Image
 				          floated='right'
@@ -147,13 +147,14 @@ class PostCards  extends React.Component {
 			    		<Button onClick={this.handleModal.bind(null,post)}>SHOW POST</Button>
 			    		{this.state.post? 
 			    		<div>
-				    		<Modal open={this.state.showmodal} onClose={this.closeModal}>
+				    		<Modal size='small' open={this.state.showmodal} onClose={this.closeModal}>
 				    			<Modal.Content>
-				    				<Image size='medium' src={this.state.post.img} floated='left'/>
-				    				<p>{this.state.post.content}</p>
+				    				<Image style={{display:'block', margin:'auto'}} size='medium' src={this.state.post.img}/>
+				    				<p style={{fontWeight:'bolder'}}>{this.state.post.content}</p>
 				    			</Modal.Content>
+
 				    			<Modal.Description>
-				    				<div>
+				    				<div style={{padding: '10px'}}>
 			    						{this.props.loggedUser._id === this.state.post.user._id?
 			    						<div>
 				    						<Button onClick={this.deletePostToggle.bind(null, this.state.post.
@@ -166,7 +167,7 @@ class PostCards  extends React.Component {
 
 
 				    				<Comment.Group>
-					    				<Header as='h3' dividing>
+					    				<Header as='h3' dividing style={{margin: '10px'}}>
 									      Comments
 									    </Header>
 				    					<CommentList 

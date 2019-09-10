@@ -95,8 +95,10 @@ class CommentList extends React.Component {
 					}
 				</div>
 				<Form onSubmit={this.handleSubmit} style={{margin: '10px auto'}}>
-					<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
-					<Button>submit</Button>
+				
+						<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
+						<Form.Button align='bottom'>submit</Form.Button>
+			
 				</Form>
 			</div>
 		)

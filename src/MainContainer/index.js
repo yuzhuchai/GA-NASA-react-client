@@ -118,7 +118,7 @@ class MainContainer extends React.Component {
 	updateUserPosts = (returnedPost, liked) => {
 		const oldPost = this.state.userPosts
 		const newUserPosts = oldPost.map(post => {
-			console.log(post,'<------- post');
+			// console.log(post,'<------- post');
 			if(post._id === returnedPost._id){
 				return returnedPost
 			} else {
@@ -134,8 +134,8 @@ class MainContainer extends React.Component {
 			}
 		})
 		
-		console.log(returnedPost,'<------here is the returned Post');
-		console.log(newUserPosts,'<------ this is the new userposts');
+		// console.log(returnedPost,'<------here is the returned Post');
+		// console.log(newUserPosts,'<------ this is the new userposts');
 		this.setState({
 			userPosts: newUserPosts,
 			allPosts: newPosts,
