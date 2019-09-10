@@ -51,7 +51,7 @@ class EditPost extends React.Component{
 			<div>
 				{this.state.post? 
 					<Form onSubmit={this.handleSubmit}>
-						<TextArea type='text' value={this.state.post.content} onChange={this.handleChange} />
+						<TextArea style={{ minHeight: 200 }} type='text' value={this.state.post.content} onChange={this.handleChange} />
 						<Button> submit </Button>
 					</Form>
 				: null}

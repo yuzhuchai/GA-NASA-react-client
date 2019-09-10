@@ -105,7 +105,7 @@ class UserPlanet extends React.Component {
 										</Form.Field>
 										<Form.Field>
 											<label> change the bio: </label>
-											<TextArea type='text' value={this.state.planetBio} name='planetBio' onChange={this.handleChange}/>
+											<TextArea style={{ minHeight: 200 }} type='text' value={this.state.planetBio} name='planetBio' onChange={this.handleChange}/>
 										</Form.Field>
 										<Button>submit</Button>
 									</Form> 

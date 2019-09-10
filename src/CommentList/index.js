@@ -58,7 +58,7 @@ class CommentList extends React.Component {
 		console.log(this.props,'<------i wanna se the comments');
 		const commentList = this.props.foundComment.map((comment) => {
 				return (
-					<Comment key={comment._id}>
+					<Comment style={{border:'1px lightgrey solid', padding:'10px', borderRadius:'20px'}} key={comment._id}>
 						<Comment.Content>
 
 							{this.props.loggedUser.username !== comment.user.username ? 
@@ -74,7 +74,7 @@ class CommentList extends React.Component {
 							<Comment.Text>{comment.content}</Comment.Text>
 							{this.props.loggedUser.username === comment.user.username ? 
 								<Comment.Actions>
-									<Comment.Action onClick={this.deleteComment.bind(null,comment._id)}>delete</Comment.Action>
+									<Comment.Action  style={{color:'pink', fontSize:'12px', textDecoration:'none'}}onClick={this.deleteComment.bind(null,comment._id)}>delete</Comment.Action>
 								</Comment.Actions>
 							:
 							null 
@@ -85,7 +85,7 @@ class CommentList extends React.Component {
 			})
 
 		return(
-			<div>
+			<div style={{padding: '10px'}}>
 				<div>
 					{this.props.foundComment?
 						<div> 
@@ -94,7 +94,7 @@ class CommentList extends React.Component {
 					: null
 					}
 				</div>
-				<Form onSubmit={this.handleSubmit}>
+				<Form onSubmit={this.handleSubmit} style={{margin: '10px auto'}}>
 					<Form.Input label='write some comment' name='comment' value={this.state.comment} onChange={this.handleChange}/>
 					<Button>submit</Button>
 				</Form>
