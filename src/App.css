@@ -65,13 +65,13 @@
 .HomePagePost{
   width: 100;
   vertical-align:middle;
-  margin: 50px auto;
+  margin: 50px 20px;
   background-color: rgba(100,100,100,0);
-  padding: 50px;
+  /*padding: 50px;*/
 }
 
 a{
-  font-size: 18px;
+  font-size: 15px;
   color: hotpink;
   text-decoration: wavy underline;
 }
@@ -82,6 +82,10 @@ a{
 }
 
 @media (max-width: 640px){
+  .App{
+    padding:2vw;
+  }
+
   .Apod, .RegisterLogin{
     display:block;
     width: 90vw;

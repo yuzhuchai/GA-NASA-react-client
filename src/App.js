@@ -45,6 +45,11 @@ class App extends React.Component {
     })
 
     // so right here when i log out i have to save the planet status. 
+    this.updatePlanetStatus()
+    // console.log(updatePlanetStatus,'<--------updated plannet status response');
+  }
+
+  updatePlanetStatus=async () => {
     const updatePlanetStatus = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/planet/status/${this.state.planetId}`,{
           method: 'PUT',
           credentials: 'include',
@@ -53,9 +58,7 @@ class App extends React.Component {
                 'Content-Type': 'application/json'
               }
       })
-    // console.log(updatePlanetStatus,'<--------updated plannet status response');
   }
-
 
 
   getApodData = async () => {
@@ -127,10 +130,10 @@ class App extends React.Component {
     // console.log(this.state,"<--------state in app");
     return (
       <div style={ appStyle } className="App">
-        <Header logout={this.logout}/>
+        <Header loggedUser={this.state.loggedUser} logout={this.logout}/>
         {this.state.displayLandingPage? <LandingContainer toggleLoginContainer={this.toggleLogInContainer} toggleRegisterContainer={this.toggleRegisterContainer} caption={this.state.apodCaption} date={this.state.date} bio={this.state.apodParagraph} video={this.state.video} notification={this.state.notification}/> : null}
         {this.state.selectPlanet ? <SelectPlanetContainer toggleContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser}/> : null}
-        {this.state.displayProfile ? <MainContainer changePlanetStatus={this.changePlanetStatus} user={this.state.user} togglePlanetContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser} /> : null}
+        {this.state.displayProfile ? <MainContainer updatePlanetStatus={this.updatePlanetStatus} changePlanetStatus={this.changePlanetStatus} user={this.state.user} togglePlanetContainer={this.togglePlanetContainer} loggedUser={this.state.loggedUser} /> : null}
       </div>
     ); 
   }

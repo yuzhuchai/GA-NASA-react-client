@@ -10,14 +10,21 @@ class Header extends React.Component{
 		}
 	}
 
+	componentDidMount () {
+		this.setState({
+			loggedUser: this.props.loggedUser
+		})
+	}
+
 	render(){
 		const header = "{HOSHI ATSUME}"
-
+		console.log(this.props,'<-----props in header');
+		console.log(this.state,'<------state in header');
 		return(
 
 			<div className='App-header'>
 	
-				<a onClick={this.props.logout}>logout</a>	
+				{this.props.loggedUser? <a onClick={this.props.logout}> welcome {this.props.loggedUser.username}, click here to logout</a>	: null }
 				<h1 className='App-header-header'> {header}</h1>
 			
 			</div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button, Modal, Form, Header, TextArea } from 'semantic-ui-react'
+import { Card, Button, Modal, Form, Header, TextArea, Progress } from 'semantic-ui-react'
 
 class UserPlanet extends React.Component {
 	constructor(){
@@ -85,7 +85,10 @@ class UserPlanet extends React.Component {
 				{this.state.planet? 
 					<Card.Content>
 						<Card.Header>{this.props.planet.name}</Card.Header>
-						<Card.Meta>Your planet happiness: {this.props.planetStatus}</Card.Meta>
+						<Card.Meta>
+							Your baby planet's happiness:
+							<Progress percent={this.props.planetStatus} progress active color='pink'/>
+						</Card.Meta>
 						<Card.Description>{this.props.planet.bio}</Card.Description>
 					</Card.Content>
 					:

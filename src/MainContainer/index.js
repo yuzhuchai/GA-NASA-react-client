@@ -225,7 +225,9 @@ class MainContainer extends React.Component {
 			showHomePage: false
 		})
 		// console.log(user,"<askljdaskas jjjj    need to see this ")
+
 		this.findPlanetAndPosts(user)
+		this.props.updatePlanetStatus()
 	}
 
 
