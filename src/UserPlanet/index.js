@@ -95,7 +95,7 @@ class UserPlanet extends React.Component {
 					null}
 					{this.props.user === this.props.loggedUser ? 
 						<Card.Content extra>
-							<Modal open={this.state.showmodal} trigger={<Button onClick={this.handleModal}>Edit</Button>} onClose={this.handleModal}>
+							<Modal open={this.state.showmodal} onClose={this.handleModal}>
 								<Modal.Header> Edit your planet profile</Modal.Header>
 								<Modal.Content>
 									<Form onSubmit={this.handleSubmit}>
@@ -111,8 +111,11 @@ class UserPlanet extends React.Component {
 									</Form> 
 								</Modal.Content>
 							</Modal>
-					      	<Button onClick={this.props.delete}>Delete</Button>
-					      	<Button onClick={this.props.increasePlanetHappiness.bind()}>play with Planet</Button>
+							<Button.Group >
+								<Button size='mini' onClick={this.handleModal}>Edit</Button>
+						      	<Button size='mini' onClick={this.props.delete}>Delete</Button>
+						      	<Button size='mini' onClick={this.props.increasePlanetHappiness.bind()}>play!!</Button>
+					      	</Button.Group>
 			      		</Card.Content> : null
 			      	}
 				</Card>
