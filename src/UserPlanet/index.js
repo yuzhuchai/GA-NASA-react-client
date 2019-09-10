@@ -47,7 +47,7 @@ class UserPlanet extends React.Component {
 		this.setState({
 			showmodal: !this.state.showmodal
 		})
-
+		this.props.increasePlanetHappiness()
 	}
 	
 	handleClick = () => {

@@ -11,16 +11,10 @@ class DataCategory extends React.Component{
 			cat: null,
 			displayPosts: false,
 			displayCat: true,
-			open: false 
 		}
 
 	}
 
-	showModal = () => {
-		this.setState({
-			open: !this.state.open
-		})
-	}
 
 	handleClick = (e) => {
 		console.log(e.target.text);
@@ -62,7 +56,6 @@ class DataCategory extends React.Component{
 			     						<Responsive as={Container} maxWidth={640}>
 			     							<Card.Description>
 				        						this data category gets data from the NASA Space Weather Database of Notifications....
-				        						<Button onClick={this.showModal}>expand</Button>
 				     						</Card.Description>
 			     						</Responsive>
 									</Card.Content>
@@ -80,7 +73,6 @@ class DataCategory extends React.Component{
 										<Card.Description>
 											this data category gets data from the NASA Astronomy Picture of the Day(APOD) api. (the background image of the app......
 										</Card.Description>
-										<Button onClick={this.showModal}>expand</Button>
 									</Responsive>
 								</Card.Content>
 							</Card>
@@ -96,7 +88,6 @@ class DataCategory extends React.Component{
 									<Responsive as={Container} maxWidth={640}>
 										<Card.Description>
 											this data category gets data from the NASA Mars Rover Photos api, as well as the InSight: Mars Weather Service api......
-											<Button onClick={this.showModal}>expand</Button>
 										</Card.Description>
 									</Responsive>
 								</Card.Content>
@@ -113,7 +104,6 @@ class DataCategory extends React.Component{
 									<Responsive as={Container} maxWidth={640}>
 										<Card.Description>
 											this data category gets data from the NASA EPIC api, which provides daily imagery collected by DISCOVER's Earth Polychromativ Imaging camera......
-											<Button onClick={this.showModal}>expand</Button>
 										</Card.Description>
 									</Responsive>
 								</Card.Content>
