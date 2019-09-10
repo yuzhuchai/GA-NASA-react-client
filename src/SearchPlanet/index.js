@@ -52,8 +52,11 @@ class SearchPlanet extends React.Component {
 
 	render(){
 		console.log(this.state,"<0------this .state ");
+		// responsive: search planet form will display no matter what, and the size is responsive through css
+		// when it's iphone planet cards will be block and each one of them will be toggle to show the info
 		return(
 			<div className='SearchPlanetParent'>
+				
 				<div className='SearchPlanet'>
 					<p>some intro about the kepler planets, need more research.</p>
 					<Form onSubmit={this.handleSubmit}>
@@ -69,6 +72,7 @@ class SearchPlanet extends React.Component {
 						<p>{this.state.message}</p>
 					</Form> 
 				</div>
+
 				<div className='Card'> 
 					{this.state.foundPlanet? <PlanetCards adoptPlanet={this.props.adoptPlanet}randomPlanet={this.state.foundPlanet}/> : null}
 				</div>

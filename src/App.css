@@ -109,4 +109,13 @@ a{
     width: 80%;
   }
 
+  .SearchPlanet {
+    width: 80vw;
+    margin: 20px auto;
+  }
+
+  .Card{
+    width:80vw;
+  }
+
 }
