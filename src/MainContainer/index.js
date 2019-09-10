@@ -65,7 +65,7 @@ class MainContainer extends React.Component {
 		})
 		console.log(url);
 		const parsed = await findPlanet.json()
-		// console.log(parsed,'<------parsed data of uer planet');
+		console.log(parsed,'<------parsed data of uer planet');
 		const planet = parsed.data[0]
 		
 		// console.log(user,'<0000000user in the findPlanet');
@@ -77,14 +77,14 @@ class MainContainer extends React.Component {
 		})
 		const parsedPosts = await findPost.json();
 		// console.log(user.favoritedPostsId,'<---------ooops');
-
-
-		this.setState({
-			likedPosts: user.favoritedPostsId,
-			planet: planet,
-			planetStatus: planet.status,
-			userPosts: [...parsedPosts.data]
-		})
+		if(planet){
+			this.setState({
+				likedPosts: user.favoritedPostsId,
+				planet: planet,
+				planetStatus: planet.status,
+				userPosts: [...parsedPosts.data]
+			})
+		}
 	}
 
 	updatePlanet = (name, bio) => {

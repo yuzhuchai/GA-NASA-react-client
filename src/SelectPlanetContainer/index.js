@@ -1,7 +1,7 @@
 import React from 'react'
 import PlanetCards from '../PlanetCards'
 import SearchPlanet from '../SearchPlanet'
-import { Button, Responsive, Segment } from 'semantic-ui-react'
+import { Button, Responsive } from 'semantic-ui-react'
 
 class SelectPlanetContainer extends React.Component {
 	constructor(){
@@ -59,21 +59,11 @@ class SelectPlanetContainer extends React.Component {
 		return(
 			<div className='PlanetContainer'>
 				<h4>Choose a planet to adopt!! you can pick from the following cards or select your own planet</h4>
-
-				
-					<Responsive minWidth={640}>
-						<SearchPlanet adoptPlanet={this.adoptPlanet}/>
-						<div className='PlanetCard'>
-							<PlanetCards randomPlanet={this.state.randomPlanet} adoptPlanet={this.adoptPlanet}/>
-						</div>
-					</Responsive> 
-					<Responsive maxWidth={640}>
-						<p>this is yes computer</p>
-					</Responsive>
-
-
+				<SearchPlanet adoptPlanet={this.adoptPlanet}/>
+				<div className='PlanetCard'>
+					<PlanetCards randomPlanet={this.state.randomPlanet} adoptPlanet={this.adoptPlanet}/>
+				</div>
 				<Button onClick={this.getRandomPlanet.bind(null)}>Shuffle</Button>
-
 			</div> 
 		)
 	}
