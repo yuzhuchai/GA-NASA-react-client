@@ -35,9 +35,8 @@ class DataCategory extends React.Component{
 					<h3>list of data DataCategory</h3>
 					<Card.Group centered itemsPerRow={2}>
 							<Card>
-								<Embed 
-									style={{width: "100%", }}
-									placeholder='https://www.nasa.gov/sites/default/files/thumbnails/image/06_airglow.gif' 
+								<Image 
+									src='https://www.nasa.gov/sites/default/files/thumbnails/image/06_airglow.gif' wrapped ui={false}
 								/>
 								<Card.Content>
 									<Card.Header><a onClick={this.handleClick}>spaceweather</a></Card.Header>
