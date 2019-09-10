@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Image, Responsive, Container, Button } from 'semantic-ui-react'
+import { Card, Image, Responsive, Container } from 'semantic-ui-react'
 import SelectPosts from '../SelectPosts'
 
 
