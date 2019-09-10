@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Image } from 'semantic-ui-react'
+import { Card, Image, Embed } from 'semantic-ui-react'
 import SelectPosts from '../SelectPosts'
 
 
@@ -35,11 +35,14 @@ class DataCategory extends React.Component{
 					<h3>list of data DataCategory</h3>
 					<Card.Group centered itemsPerRow={2}>
 							<Card>
-								<Image src='https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/iss052e007857_0.jpg' wrapped ui={false} />
+								<Embed 
+									style={{width: "100%", }}
+									placeholder='https://www.nasa.gov/sites/default/files/thumbnails/image/06_airglow.gif' 
+								/>
 								<Card.Content>
 									<Card.Header><a onClick={this.handleClick}>spaceweather</a></Card.Header>
 									<Card.Description>
-		        						this data category gets data from the NASA Space Weather Database of Notifications, Knowledge, Information (DNKI) api. <br/>Generated post content will contain: 
+		        						this data category gets data from the NASA Space Weather Database of Notifications, Knowledge, Information (DONKI) api. <br/>Generated post content will contain: 
 		     						</Card.Description>
 								</Card.Content>
 							</Card>

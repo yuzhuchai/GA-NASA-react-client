@@ -67,12 +67,12 @@ class App extends React.Component {
       // console.log(parsdResponse,"<------landing page apod data");
       if (parsdResponse.data.mediaType ==='video'){
         this.setState({
-          apodImgUrl: 'https://apod.nasa.gov/apod/image/1705/BeneathJupiter_Juno_960.jpg',
+          apodImgUrl: 'https://apod.nasa.gov/apod/image/1909/PlutoTrueColor_NewHorizons_960.jpg',
           apodCaption: parsdResponse.data.imgCaption,
           apodParagraph: parsdResponse.data.explnation,
           date: parsdResponse.data.date,
           video:parsdResponse.data.imgUrl,
-          notification: 'this background image is Jupiter, the following paragraph is the description of NASA image of the day, which it this video.'
+          notification: 'this background image is Pluto, taken on 9/10/2019. The following paragraph is the description of NASA image of the day, which it this video.'
         }) 
       } else {
         this.setState({
