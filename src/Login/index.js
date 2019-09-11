@@ -20,7 +20,7 @@ class Login extends React.Component {
 			credentials: 'include',
 			headers: {
 		          'Content-Type': 'application/json'
-		        }
+		    }
 		})
 		if(loginResponse.status !== 200){
 	        	throw Error('login not working')

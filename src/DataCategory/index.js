@@ -115,7 +115,7 @@ class DataCategory extends React.Component{
 			{this.state.displayPosts? 
 				<div>
 					<a onClick={this.handleClick}>back to DataCategory</a>
-					<h1>should be some posts of {this.state.cat}</h1>
+					<h1>click shuffle to see more posts from {this.state.cat}</h1>
 					<SelectPosts handlePostOpen={this.props.handlePostOpen} increasePlanetHappiness={this.props.increasePlanetHappiness} cat={this.state.cat}/>
 				</div>
 				:null

@@ -60,7 +60,7 @@ class SearchPlanet extends React.Component {
 			<div className='SearchPlanetParent'>
 				
 				<div className='SearchPlanet'>
-					<p>some intro about the kepler planets, need more research.</p>
+					<p>You can search for a planet discovered by the Kepler telescope. Enter the number of the star in the cluster and the letter of the planet!</p>
 					<Form onSubmit={this.handleSubmit}>
 							<Form.Field>
 								<label> number </label>
